@@ -1,0 +1,822 @@
+/* Google Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+
+:root {
+    /* Bright & Professional Colors */
+    --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); /* Indigo to Purple */
+    --bg-light: #f8fafc;
+    --card-white: #ffffff;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-light);
+    /* બેકગ્રાઉન્ડમાં હળવા કલરના ગોળા (Blur Blobs) જે મોર્ડન લાગે */
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 20%);
+    color: var(--text-dark);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+}
+
+/* --- Colorful Navbar --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    border-bottom: 2px solid #f1f5f9;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* લોગો કલરફુલ ગ્રેડિયન્ટમાં */
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-left: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #6366f1;
+}
+
+.login-btn {
+    background: var(--primary-gradient);
+    color: white !important;
+    padding: 10px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); /* કલરફુલ શેડો */
+}
+
+/* --- Hero Section with Colorful Text --- */
+.hero {
+    text-align: center;
+    padding: 80px 5%;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+/* અમુક શબ્દોને કલરફુલ બનાવવા માટે */
+.hero h1 span {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+}
+
+/* --- Colorful Glass Search Bar --- */
+.search-bar {
+    display: flex;
+    background: white;
+    padding: 10px;
+    border-radius: 20px;
+    max-width: 650px;
+    margin: 0 auto;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08); /* સોફ્ટ શેડો */
+    border: 2px solid transparent;
+    background-image: linear-gradient(white, white), var(--primary-gradient);
+    background-origin: border-box;
+    background-clip: padding-box, border-box; /* બોર્ડર ગ્રેડિયન્ટમાં */
+}
+
+.search-bar input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.search-bar button {
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    padding: 0 30px;
+    border-radius: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(168, 85, 247, 0.2);
+}
+
+/* --- Colorful Category Tags --- */
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+}
+
+.cat-tag {
+    background: white;
+    padding: 12px 25px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    border: 1px solid #e2e8f0;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+/* દરેક કેટેગરીને અલગ કલરની ઈફેક્ટ આપવા */
+.cat-tag:hover {
+    transform: translateY(-5px);
+    color: white;
+    background: var(--primary-gradient);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+    border-color: transparent;
+}
+/* --- Book Display Section --- */
+.book-container {
+    padding: 60px 8%;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.section-title span {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Book Grid Layout */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+/* Individual Card Styling */
+.book-card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid #f1f5f9;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    position: relative;
+}
+
+.book-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.1);
+    border-color: #e2e8f0;
+}
+
+/* Book Image Area */
+.book-img {
+    height: 320px;
+    background: #f8fafc;
+    position: relative;
+    overflow: hidden;
+}
+
+.book-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.book-card:hover .book-img img {
+    transform: scale(1.08);
+}
+
+/* Badges */
+.category-badge, .sold-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    padding: 6px 15px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #6366f1;
+}
+
+.category-badge.free { color: #22c55e; }
+.sold-badge { background: #ef4444; color: white; }
+
+/* Book Details */
+.book-info {
+    padding: 20px;
+}
+
+.book-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: var(--text-dark);
+}
+
+.author {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+}
+
+.price-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.price {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #1e293b;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.free-label {
+    color: #22c55e;
+    font-weight: 700;
+}
+
+/* WhatsApp Button */
+.chat-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 14px;
+    background: #f1f5f9;
+    color: #475569;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.book-card:hover .chat-btn {
+    background: var(--primary-gradient);
+    color: white;
+}
+
+.chat-btn.disabled {
+    background: #f8fafc;
+    color: #cbd5e1;
+    cursor: not-allowed;
+}
+/* --- Login Page Styles --- */
+.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f8fafc; /* Light Professional Grey */
+}
+
+.login-container {
+    width: 100%;
+    max-width: 450px;
+    padding: 20px;
+}
+
+.login-card {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.05);
+    border: 1px solid #f1f5f9;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.back-link {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.login-header h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.login-header h2 span {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.login-header p {
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+/* Input Fields Style */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    font-family: inherit;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #6366f1;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.forgot-pass {
+    text-align: right;
+    margin-bottom: 30px;
+}
+
+.forgot-pass a {
+    color: #6366f1;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Login Button */
+.login-submit {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: var(--primary-gradient);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+    transition: 0.3s;
+}
+
+.login-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px rgba(99, 102, 241, 0.3);
+}
+
+.login-footer {
+    margin-top: 30px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.login-footer a {
+    color: #6366f1;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* Entry Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* --- Upload Page Styles --- */
+.upload-body {
+    background-color: #f8fafc;
+}
+
+.upload-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 0 20px;
+    animation: fadeIn 0.8s ease;
+}
+
+.upload-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.upload-header h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.upload-header h2 span {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Image Upload Placeholder */
+.image-upload-box {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    border: 2px dashed #e2e8f0;
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.upload-label:hover {
+    border-color: #6366f1;
+    background: rgba(99, 102, 241, 0.02);
+}
+
+.upload-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.upload-form {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Dropdown Menu Style */
+select {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    font-family: inherit;
+    appearance: none; /* Removes default arrow */
+    cursor: pointer;
+}
+
+textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    font-family: inherit;
+    resize: none;
+}
+
+.upload-submit {
+    width: 100%;
+    padding: 18px;
+    margin-top: 30px;
+    border: none;
+    border-radius: 15px;
+    background: var(--primary-gradient);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+    transition: 0.3s;
+}
+
+.upload-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.3);
+}
+
+/* Responsive for Mobile */
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* --- Request Page Styles --- */
+.request-body {
+    background: #f8fafc;
+}
+
+.request-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.request-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.request-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+}
+
+/* Form Card */
+.request-form-card {
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+    height: fit-content;
+}
+
+.request-form-card h3 {
+    margin-bottom: 25px;
+    font-size: 1.4rem;
+}
+
+.request-submit {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: var(--primary-gradient);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+}
+
+/* Requests List */
+.live-requests h3 {
+    margin-bottom: 25px;
+}
+
+.req-item {
+    background: white;
+    padding: 20px;
+    border-radius: 18px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #f1f5f9;
+    transition: 0.3s;
+}
+
+.req-item:hover {
+    border-color: #6366f1;
+    transform: translateX(5px);
+}
+
+.req-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.req-info p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.req-info span {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.status-badge {
+    background: #fef9c3;
+    color: #a16207;
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* Mobile Responsive */
+@media (max-width: 800px) {
+    .request-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Wishlist Button Styling */
+.wishlist-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease;
+    z-index: 10;
+}
+
+.heart-icon {
+    color: #cbd5e1; /* Default Grey Heart */
+    font-size: 1.4rem;
+    transition: 0.3s;
+}
+
+/* જ્યારે બટન એક્ટિવ (ક્લિક કરેલું) હોય ત્યારે */
+.wishlist-btn.active .heart-icon {
+    color: #ff4757; /* Red Heart */
+    transform: scale(1.2);
+}
+
+.wishlist-btn:hover {
+    transform: scale(1.1);
+}
+/* --- Location Badge Style --- */
+.location-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #f1f5f9; /* Soft Blue-Grey */
+    color: #6366f1;      /* Indigo Color */
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.loc-icon {
+    font-size: 0.9rem;
+}
+
+/* સર્ચ બારમાં લોકેશન ફિલ્ટર માટે */
+.location-filter {
+    border-left: 1px solid #e2e8f0;
+    padding-left: 15px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.location-filter select {
+    border: none;
+    background: transparent;
+    font-weight: 600;
+    color: var(--text-dark);
+    outline: none;
+    cursor: pointer;
+}
+/* --- Free Books Section Style --- */
+.free-books-section {
+    padding: 60px 8%;
+    background: linear-gradient(to bottom, #f0fdf4 0%, #ffffff 100%); /* Light Greenish Fade */
+    border-radius: 50px 50px 0 0;
+    margin-top: 40px;
+}
+
+.free-tag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #22c55e; /* Bright Green */
+    color: white;
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);
+}
+
+.free-price {
+    color: #22c55e;
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+/* Free Button Hover Effect */
+.free-btn {
+    background: #22c55e !important;
+    color: white !important;
+    border: none;
+    box-shadow: 0 10px 20px rgba(34, 197, 94, 0.2);
+}
+
+.free-btn:hover {
+    background: #16a34a !important;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px rgba(34, 197, 94, 0.3);
+}
+
+/* Free Card Special Border */
+.free-card {
+    border: 2px solid #dcfce7 !important;
+}
+
+.free-card:hover {
+    border-color: #22c55e !important;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* એક્ટિવ કેટેગરી માટે સ્ટાઈલ */
+.active-tag {
+    background: var(--primary-gradient) !important;
+    color: white !important;
+    border-color: transparent !important;
+}
+.condition-tag {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    backdrop-filter: blur(5px);
+}
+
+.seller-rating {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.stars {
+    color: #fbbf24; /* Golden color for stars */
+}
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 30px auto;
+    flex-wrap: wrap; /* આનાથી મોબાઈલમાં ટેગ્સ બીજી લાઈનમાં આવશે અને કપાશે નહીં */
+    max-width: 90%;
+}
+
+.cat-tag {
+    cursor: pointer;
+    padding: 10px 25px;
+    border-radius: 50px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: 0.3s ease;
+    white-space: nowrap; /* ટેગનું લખાણ એક જ લાઈનમાં રહેશે */
+}

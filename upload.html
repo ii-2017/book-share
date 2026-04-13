@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Book | BOOKSHARE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="upload-body">
+
+    <nav class="navbar">
+        <div class="logo">BOOKSHARE</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="upload.html" class="active">Sell Book</a>
+            <a href="login.html" class="login-btn">My Account</a>
+        </div>
+    </nav>
+
+    <div class="upload-container">
+        <div class="upload-header">
+            <h2>List Your <span>Book</span></h2>
+            <p>Fill in the details to find a buyer quickly</p>
+        </div>
+
+        <form class="upload-form">
+            <div class="image-upload-box">
+                <input type="file" id="book-img" hidden>
+                <label for="book-img" class="upload-label">
+                    <span class="upload-icon">📸</span>
+                    <p>Click to Upload Book Cover</p>
+                </label>
+            </div>
+
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Book Title</label>
+                    <input type="text" placeholder="e.g. 12th Physics NCERT" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Category</label>
+                    <select required>
+                        <option value="">Select Category</option>
+                        <option value="commerce">Commerce</option>
+                        <option value="science">Science</option>
+                        <option value="engineering">Engineering</option>
+                        <option value="school">1-12th Std</option>
+                        <option value="exam">Exam Preparation</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Price (₹)</label>
+                    <input type="number" placeholder="Enter price (0 for Free)" required>
+                </div>
+
+                <div class="input-group">
+                    <label>City / Location</label>
+                    <input type="text" placeholder="e.g. Rajkot, Gujarat" required>
+                </div>
+                <div class="input-group">
+    <label>Book Condition (Current Status)</label>
+    <select id="book-condition" style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0; background: #f8fafc;" required>
+        <option value="5">⭐⭐⭐⭐⭐ (Like New / Seal Pack)</option>
+        <option value="4">⭐⭐⭐⭐ (Good / Minimal Use)</option>
+        <option value="3">⭐⭐⭐ (Average / Readable)</option>
+        <option value="2">⭐⭐ (Old / Some pages loose)</option>
+        <option value="1">⭐ (Very Old / Rough condition)</option>
+    </select>
+</div>
+            </div>
+
+            <div class="input-group">
+                <label>WhatsApp Number</label>
+                <input type="tel" placeholder="Enter your WhatsApp number" required>
+            </div>
+
+            <div class="input-group">
+                <label>Short Description (Optional)</label>
+                <textarea rows="3" placeholder="Condition of the book, edition year, etc."></textarea>
+            </div>
+
+            <button type="submit" class="upload-submit">Post Listing Now</button>
+        </form>
+    </div>
+
+</body>
+</html>

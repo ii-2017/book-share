@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request a Book | BOOKSHARE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="request-body">
+
+    <nav class="navbar">
+        <div class="logo">BOOKSHARE</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="request.html" class="active">Request Book</a>
+            <a href="upload.html">Sell Book</a>
+        </div>
+    </nav>
+
+    <div class="request-container">
+        <div class="request-header">
+            <h2>Can't find your <span>Book?</span></h2>
+            <p>Post a request and we will notify you when someone uploads it.</p>
+        </div>
+
+        <div class="request-grid">
+            <div class="request-form-card">
+                <h3>Post New Request</h3>
+                <form class="request-form">
+                    <div class="input-group">
+                        <label>Book Name / Author</label>
+                        <input type="text" placeholder="e.g. JEE Maths by Cengage" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Category</label>
+                        <select required>
+                            <option value="">Choose Category</option>
+                            <option value="commerce">Commerce</option>
+                            <option value="science">Science</option>
+                            <option value="exam">Exam Prep</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Your City</label>
+                        <input type="text" placeholder="Your current location" required>
+                    </div>
+                    <button type="submit" class="request-submit">Post Request</button>
+                </form>
+            </div>
+
+            <div class="live-requests">
+                <h3>Recent Requests</h3>
+                <div class="request-list">
+                    <div class="req-item">
+                        <div class="req-info">
+                            <h4>Organic Chemistry - OP Tandon</h4>
+                            <p>Requested by: <span>Rahul S.</span> • Rajkot</p>
+                        </div>
+                        <span class="status-badge">Waiting</span>
+                    </div>
+
+                    <div class="req-item">
+                        <div class="req-info">
+                            <h4>CA Foundation - Accounts</h4>
+                            <p>Requested by: <span>Priya K.</span> • Ahmedabad</p>
+                        </div>
+                        <span class="status-badge">Waiting</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
