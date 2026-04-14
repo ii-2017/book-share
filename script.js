@@ -1,79 +1,197 @@
-// WhatsApp પર મેસેજ મોકલવાનું ફંક્શન
+// ૧. WhatsApp પર મેસેજ મોકલવાનું ફંક્શન
 function contactSeller(phoneNumber, bookName) {
-    // વોટ્સએપ મેસેજ તૈયાર કરો
+    if (!phoneNumber || phoneNumber === "" || phoneNumber === "undefined") {
+        alert("સેલરનો WhatsApp નંબર ઉપલબ્ધ નથી.");
+        return;
+    }
     const message = `Hello, I saw your book "${bookName}" on BOOKSHARE and I am interested in buying it.`;
-    
-    // WhatsApp API લિંક બનાવો
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    
-    // નવી ટેબમાં વોટ્સએપ ખોલો
     window.open(whatsappUrl, '_blank');
 }
 
-// બુકને Sold Out માર્ક કરવા માટેનું લોજિક (સેલર માટે)
-function markAsSold(buttonElement) {
-    const card = buttonElement.closest('.book-card');
-    
-    // કાર્ડમાં Sold Out ક્લાસ ઉમેરો
-    card.classList.add('sold');
-    
-    // બટન બદલી નાખો
-    buttonElement.innerText = "Sold Out";
-    buttonElement.disabled = true;
-    buttonElement.classList.add('disabled');
-    
-    // અહીં તમે વોટ્સએપ પર ઓટોમેટિક મેસેજ મોકલવા માટેનું લોજિક પણ સેટ કરી શકો
-    alert("This book is now marked as Sold!");
-}
+// ૨. Wishlist Toggle ફંક્શન
 function toggleWishlist(button, bookName) {
-    // હાર્ટનો કલર બદલવા માટે 'active' ક્લાસ ટોગલ કરો
     button.classList.toggle('active');
-    
     if (button.classList.contains('active')) {
-        // બુક એડ થઈ ત્યારે
-        alert(bookName + " Wishlist ma add thai gayi chhe! ❤️");
+        alert(bookName + " Wishlist માં ઉમેરાઈ ગઈ છે! ❤️");
     } else {
-        // બુક કાઢી નાખી ત્યારે
-        alert(bookName + " Wishlist mathi kadhi nakhi.");
+        alert(bookName + " Wishlist માંથી કાઢી નાખી.");
     }
 }
-function filterBooks(category) {
-    // બધી બુક કાર્ડ્સ મેળવો
+
+// ૩. Category Filter ફંક્શન
+function filterBooks(category, element) {
     const books = document.querySelectorAll('.book-card');
     const tags = document.querySelectorAll('.cat-tag');
 
-    // એક્ટિવ ટેગનો કલર બદલવા માટે (Optional)
-    tags.forEach(tag => {
-        tag.classList.remove('active-tag');
-        if(tag.innerText.toLowerCase() === category) {
-            tag.classList.add('active-tag');
-        }
-    });
+    // એક્ટિવ ટેગની સ્ટાઈલ બદલો
+    if(element) {
+        tags.forEach(tag => tag.classList.remove('active-tag'));
+        element.classList.add('active-tag');
+    }
 
     books.forEach(book => {
-        // જો 'all' સિલેક્ટ કર્યું હોય તો બધી બુક્સ બતાવો
-        if (category === 'all') {
+        const bookCat = book.getAttribute('data-category');
+        if (category === 'all' || bookCat === category) {
             book.style.display = 'block';
-            book.style.animation = 'fadeIn 0.5s ease'; // એનિમેશન સાથે બતાવો
-        } 
-        // જો કેટેગરી મેચ થાય તો બતાવો, નહીંતર છુપાવો (Hide)
-        else if (book.getAttribute('data-category') === category) {
-            book.style.display = 'block';
-            book.style.animation = 'fadeIn 0.5s ease';
-        } 
-        else {
+        } else {
             book.style.display = 'none';
         }
     });
 }
-// ખરીદનાર સેલરને રેટિંગ આપી શકે તે માટે
-function rateSeller(sellerName) {
-    let rating = prompt(`How was your experience with ${sellerName}? (Enter 1 to 5 stars)`);
+
+// ૪. બુક સેવ કરવાનું લોજિક (Upload Page માટે)
+const bookForm = document.getElementById('bookForm');
+
+if (bookForm) {
+    bookForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // બધી વેલ્યુ મેળવો
+        const titleVal = document.getElementById('title').value;
+        const catVal = document.getElementById('category').value;
+        const priceVal = document.getElementById('price').value;
+        const locVal = document.getElementById('location').value;
+        const whatsappVal = document.getElementById('whatsapp').value;
+        const condVal = document.getElementById('book-condition').value;
+
+        // નવો બુક ઓબ્જેક્ટ
+        const newBook = {
+            title: titleVal,
+            category: catVal,
+            price: priceVal,
+            location: locVal,
+            whatsapp: whatsappVal,
+            condition: condVal,
+            id: Date.now()
+        };
+
+        // લોકલ સ્ટોરેજમાં સેવ કરો
+        let books = JSON.parse(localStorage.getItem('myBooks')) || [];
+        books.push(newBook);
+        localStorage.setItem('myBooks', JSON.stringify(books));
+
+        // રિક્વેસ્ટ નોટિફિકેશન ચેક
+        const requestedTitle = localStorage.getItem('lastRequestedBook');
+        if (requestedTitle && titleVal.toLowerCase().includes(requestedTitle.toLowerCase())) {
+            alert("🔔 NOTIFICATION: આ બુકની કોઈએ રિક્વેસ્ટ કરેલી છે!");
+        }
+
+        alert("બુક સફળતાપૂર્વક અપલોડ થઈ ગઈ છે!");
+        
+        // થોભો, ડેટા સેવ થયા પછી જ હોમ પેજ પર જશે
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 500);
+    });
+}
+
+// ૫. હોમ પેજ પર બુક્સ બતાવવાનું ફંક્શન (Index Page માટે)
+function displayBooks() {
+    const bookGrid = document.getElementById('bookGrid');
+    if (!bookGrid) return; 
+
+    const savedBooks = JSON.parse(localStorage.getItem('myBooks')) || [];
+
+    savedBooks.forEach(book => {
+        const bookHTML = `
+            <div class="book-card" data-category="${book.category}">
+                <div class="book-img">
+                    <img src="https://via.placeholder.com/200x250?text=${encodeURIComponent(book.title)}" alt="Book">
+                    <button class="wishlist-btn" onclick="toggleWishlist(this, '${book.title}')">❤</button>
+                </div>
+                <div class="book-info">
+                    <div class="seller-rating" style="font-size: 0.8rem; color: #64748b; margin-bottom: 5px;">
+                        Seller Trust: <span style="color: #fbbf24;">⭐⭐⭐⭐☆</span>
+                    </div>
+                    <div class="location-badge">📍 ${book.location}</div>
+                    <h3>${book.title}</h3>
+                    <p style="font-size: 0.85rem; color: #22c55e; font-weight: 700; margin-top: 5px;">
+                        Condition: ${book.condition}/5 Star Quality
+                    </p>
+                    <div class="price-row"><span class="price">₹${book.price}</span></div>
+                    <button class="chat-btn" onclick="contactSeller('${book.whatsapp}', '${book.title}')">
+                        Chat on WhatsApp
+                    </button>
+                </div>
+            </div>
+        `;
+        bookGrid.innerHTML += bookHTML;
+    });
+}
+
+// પેજ લોડ થાય ત્યારે બુક્સ બતાવવાનું ફંક્શન ચલાવો
+window.addEventListener('DOMContentLoaded', displayBooks);
+const searchInput = document.querySelector('.search-bar input');
+const searchBtn = document.querySelector('.search-bar button');
+
+if (searchInput) {
+    searchInput.addEventListener('input', function() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const books = document.querySelectorAll('.book-card');
+
+        books.forEach(book => {
+            const title = book.querySelector('h3').innerText.toLowerCase();
+            if (title.includes(searchTerm)) {
+                book.style.display = 'block';
+            } else {
+                book.style.display = 'none';
+            }
+        });
+    });
+}
+// ૧. Live Search માટે
+const searchInput = document.getElementById('bookSearch');
+
+if (searchInput) {
+    searchInput.addEventListener('keyup', function() {
+        let value = this.value.toLowerCase();
+        let cards = document.querySelectorAll('.book-card');
+
+        cards.forEach(card => {
+            let title = card.querySelector('h3').innerText.toLowerCase();
+            if (title.indexOf(value) > -1) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    });
+}
+
+// ૨. City Filter માટે
+const cityDropdown = document.getElementById('city-select');
+
+if (cityDropdown) {
+    cityDropdown.addEventListener('change', function() {
+        let selectedCity = this.value.toLowerCase();
+        let cards = document.querySelectorAll('.book-card');
+
+        cards.forEach(card => {
+            let location = card.querySelector('.location-badge').innerText.toLowerCase();
+            if (selectedCity === "all" || location.includes(selectedCity)) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    });
+}
+
+function markAsSold(btn) {
+    console.log("Button Clicked!"); // આ ચેક કરવા માટે છે
+
+    // તમારા HTML સ્ટ્રક્ચર મુજબ: button -> book-info -> book-card
+    // એટલે આપણે બે વાર parentElement લેવું પડશે
+    const card = btn.parentElement.parentElement; 
     
-    if (rating >= 1 && rating <= 5) {
-        alert(`Thank you! You gave ${rating} stars to the seller. This will help other students.`);
-        // ભવિષ્યમાં આ રેટિંગ આપણે ડેટાબેઝમાં સેવ કરશું
-    } else if (rating !== null) {
-        alert("Please enter a valid rating between 1 and 5.");
+    console.log("Card found:", card);
+
+    if (confirm("શું આ બુક વેચાઈ ગઈ છે?")) {
+        card.classList.add('sold');
+        btn.innerText = "SOLD OUT";
+        btn.style.background = "#ff4757";
+        btn.disabled = true;
+        alert("બુક હવે Sold Out દેખાશે.");
     }
 }

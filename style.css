@@ -820,3 +820,37 @@ textarea {
     transition: 0.3s ease;
     white-space: nowrap; /* ટેગનું લખાણ એક જ લાઈનમાં રહેશે */
 }
+.sold-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    z-index: 5;
+    pointer-events: none;
+}
+/* Sold Out કાર્ડ માટેની ડિઝાઈન */
+.book-card.sold {
+    position: relative;
+    opacity: 0.6;
+    pointer-events: none; /* ક્લિક બંધ કરી દેશે */
+}
+
+.book-card.sold::before {
+    content: "SOLD OUT";
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    background: #ff4757;
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: 2px solid white;
+    z-index: 100;
+    border-radius: 5px;
+}

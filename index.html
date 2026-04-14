@@ -9,139 +9,199 @@
 <body>
 
     <nav class="navbar">
-    <div class="logo">BOOKSHARE</div>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="request.html">Request Book</a>
-        <a href="#" style="color: #ff4757;">My Wishlist ❤️</a> 
-        <a href="upload.html">Sell Book</a>
-        <a href="login.html" class="login-btn">Login</a>
-    </div>
-</nav>
+        <div class="logo">BOOKSHARE</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="request.html">Request Book</a>
+            <a href="#" style="color: #ff4757;">My Wishlist ❤️</a> 
+            <a href="upload.html">Sell Book</a>
+            <a href="login.html" class="login-btn">Login</a>
+        </div>
+    </nav>
+
     <section class="hero">
         <h1>Give Your Books A Second Life</h1>
         <p>Buy and sell used books within your city at the best prices.</p>
+        
         <div class="search-bar">
-    <input type="text" placeholder="Search book name...">
-    
-    <div class="location-filter">
-        <span class="loc-icon">📍</span>
-        <select id="city-select">
-            <option value="all">All Cities</option>
-            <option value="rajkot">Rajkot</option>
-            <option value="ahmedabad">Ahmedabad</option>
-            <option value="surat">Surat</option>
-            <option value="baroda">Baroda</option>
-        </select>
-    </div>
-    
-    <button>Search</button>
-</div>
+            <input type="text" id="bookSearch" onkeyup="liveSearch()" placeholder="Search book name...">
+            
+            <div class="location-filter">
+                <span class="loc-icon">📍</span>
+                <select id="city-select" onchange="cityFilter()">
+                    <option value="all">All Cities</option>
+                    <option value="rajkot">Rajkot</option>
+                    <option value="ahmedabad">Ahmedabad</option>
+                    <option value="surat">Surat</option>
+                    <option value="baroda">Baroda</option>
+                </select>
+            </div>
+            <button>Search</button>
+        </div>
+
         <div class="categories">
-    <div class="cat-tag active-tag" onclick="filterBooks('all', this)">All</div>
-    <div class="cat-tag" onclick="filterBooks('school', this)">1 to 12 Std</div> 
-    <div class="cat-tag" onclick="filterBooks('science', this)">Science</div>
-    <div class="cat-tag" onclick="filterBooks('commerce', this)">Commerce</div>
-    <div class="cat-tag" onclick="filterBooks('engineering', this)">Engineering</div>
-    <div class="cat-tag" onclick="filterBooks('exam', this)">Exam Prep</div>
-</div>
-<div class="book-container">
-    <div class="book-grid" id="bookGrid">
-        
-        <div class="book-card" data-category="science">
-            <div class="book-img">
-                <img src="c:\Users\Krutika Borsaniya\Pictures\phi.jpg" alt="Science Book">
-                <button class="wishlist-btn" onclick="toggleWishlist(this, 'Physics Part 1')">❤</button>
-            </div>
-            <div class="book-info">
-                <div class="book-info">
-    <div class="seller-rating" style="font-size: 0.8rem; color: #64748b; margin-bottom: 5px;">
-        Seller Trust: <span style="color: #fbbf24;">⭐⭐⭐⭐☆</span> <small>(12)</small>
-    </div>
-
-    <div class="location-badge">📍 Rajkot</div>
-    
-    <h3>Physics Part 1</h3>
-    
-    <p style="font-size: 0.85rem; color: #22c55e; font-weight: 700; margin-top: 5px;">
-        Condition: 4/5 Star Quality
-    </p>
-
-    <p class="author">By NCERT | Science</p>
-    ...
-</div>
-                <div class="location-badge">📍 Rajkot</div>
-                <h3>Physics Part 1</h3>
-                <p class="author">By NCERT | Science</p>
-                <div class="price-row"><span class="price">₹150</span></div>
-                <button class="chat-btn" onclick="contactSeller('9100000000', 'Physics Part 1')">Chat on WhatsApp</button>
-            </div>
+            <div class="cat-tag active-tag" onclick="filterBooks('all', this)">All</div>
+            <div class="cat-tag" onclick="filterBooks('school', this)">1 to 12 Std</div> 
+            <div class="cat-tag" onclick="filterBooks('science', this)">Science</div>
+            <div class="cat-tag" onclick="filterBooks('commerce', this)">Commerce</div>
+            <div class="cat-tag" onclick="filterBooks('engineering', this)">Engineering</div>
+            <div class="cat-tag" onclick="filterBooks('exam', this)">Exam Prep</div>
         </div>
-
-        <div class="book-card" data-category="commerce">
-            <div class="book-img">
-                <img src="c:\Users\Krutika Borsaniya\Pictures\commers.jpg" alt="Commerce Book">
-                <button class="wishlist-btn" onclick="toggleWishlist(this, 'Accountancy')">❤</button>
-            </div>
-            <div class="book-info">
-                <div class="location-badge">📍 Ahmedabad</div>
-                <h3>Accountancy</h3>
-                <p class="author">By TS Grewal | Commerce</p>
-                <div class="price-row"><span class="price">₹200</span></div>
-                <button class="chat-btn" onclick="contactSeller('9100000000', 'Accountancy')">Chat on WhatsApp</button>
-            </div>
-        </div>
-
-        <div class="book-card" data-category="engineering">
-            <div class="book-img">
-                <img src="c:\Users\Krutika Borsaniya\Pictures\engineer book.jpg" alt="Engineering Book">
-                <button class="wishlist-btn" onclick="toggleWishlist(this, 'Engineering Drawing')">❤</button>
-            </div>
-            <div class="book-info">
-                <div class="location-badge">📍 Surat</div>
-                <h3>Engineering Drawing</h3>
-                <p class="author">By N.D. Bhatt | Engineering</p>
-                <div class="price-row"><span class="price">₹300</span></div>
-                <button class="chat-btn" onclick="contactSeller('9100000000', 'Engineering Drawing')">Chat on WhatsApp</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-</button>
-            </div>
-        </div>
-
-        
-    <section class="free-books-section">
-    <div class="section-header">
-        <h2 class="section-title">Free <span>Bookshelf</span> 🎁</h2>
-        <p>Books available for free to help students in need.</p>
-    </div>
-
-    <div class="book-grid">
-        <div class="book-card free-card">
-            <div class="book-img">
-                <img src="https://m.media-amazon.com/images/I/81GeSAtn6GL.jpg" alt="Free Book">
-                <span class="free-tag">GIFT</span>
-                <button class="wishlist-btn" onclick="toggleWishlist(this, 'Engineering Drawing')"><span class="heart-icon">❤</span></button>
-            </div>
-            <div class="book-info">
-                <div class="location-badge">📍 Ahmedabad</div>
-                <h3>Engineering Drawing</h3>
-                <p class="author">By N.D. Bhatt | 1st Year</p>
-                <div class="price-row">
-                    <span class="free-price">FREE / ₹0</span>
-                </div>
-                <button class="chat-btn free-btn">Claim for Free</button>
-            </div>
-        </div>
-
-        </div>
-</section>
-</section>
     </section>
 
+    <div class="book-container">
+        <h2 class="section-title">Latest <span>Books</span></h2>
+        <div class="book-grid" id="bookGrid">
+            
+            <div class="book-card" data-category="science">
+                <div class="book-img">
+                    <img src="c:\Users\Krutika Borsaniya\Pictures\phi.jpg" alt="Science Book">
+                    <button class="wishlist-btn" onclick="toggleWishlist(this, 'Physics Part 1')">❤</button>
+                </div>
+                <div class="book-info">
+                    <div class="seller-rating" style="font-size: 0.8rem; color: #64748b; margin-bottom: 5px;">
+                        Seller Trust: <span style="color: #fbbf24;">⭐⭐⭐⭐☆</span> <small>(12)</small>
+                    </div>
+                    <div class="location-badge">📍 Rajkot</div>
+                    <h3>Physics Part 1</h3>
+                    <p style="font-size: 0.85rem; color: #22c55e; font-weight: 700; margin-top: 5px;">Condition: 4/5 Star Quality</p>
+                    <p class="author">By NCERT | Science</p>
+                    <div class="price-row"><span class="price">₹150</span></div>
+                    <button class="chat-btn" onclick="contactSeller('9100000000', 'Physics Part 1')">Chat on WhatsApp</button>
+                    <button class="sold-btn" onclick="markAsSold(this)" style="margin-top: 10px; background: #64748b; color: white; border: none; padding: 8px; border-radius: 8px; cursor: pointer; width: 100%;">Mark as Sold</button>
+                </div>
+            </div>
+
+            <div class="book-card" data-category="commerce">
+                <div class="book-img">
+                    <img src="c:\Users\Krutika Borsaniya\Pictures\commers.jpg" alt="Commerce Book">
+                    <button class="wishlist-btn" onclick="toggleWishlist(this, 'Accountancy')">❤</button>
+                </div>
+                <div class="book-info">
+                    <div class="location-badge">📍 Ahmedabad</div>
+                    <h3>Accountancy</h3>
+                    <p class="author">By TS Grewal | Commerce</p>
+                    <div class="price-row"><span class="price">₹200</span></div>
+                    <button class="chat-btn" onclick="contactSeller('9100000000', 'Accountancy')">Chat on WhatsApp</button>
+                    <button class="sold-btn" onclick="markAsSold(this)" style="margin-top: 10px; background: #64748b; color: white; border: none; padding: 8px; border-radius: 8px; cursor: pointer; width: 100%;">Mark as Sold</button>
+                </div>
+            </div>
+
+            <div class="book-card" data-category="engineering">
+                <div class="book-img">
+                    <img src="c:\Users\Krutika Borsaniya\Pictures\engineer book.jpg" alt="Engineering Book">
+                    <button class="wishlist-btn" onclick="toggleWishlist(this, 'Engineering Drawing')">❤</button>
+                </div>
+                <div class="book-info">
+                    <div class="location-badge">📍 Surat</div>
+                    <h3>Engineering Drawing</h3>
+                    <p class="author">By N.D. Bhatt | Engineering</p>
+                    <div class="price-row"><span class="price">₹300</span></div>
+                    <button class="chat-btn" onclick="contactSeller('9100000000', 'Engineering Drawing')">Chat on WhatsApp</button>
+                    <button class="sold-btn" onclick="markAsSold(this)" style="margin-top: 10px; background: #64748b; color: white; border: none; padding: 8px; border-radius: 8px; cursor: pointer; width: 100%;">Mark as Sold</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // ૧. બ્રાઉઝરમાં સાચવેલી નવી બુક્સ લોડ કરવા માટે
+        function displaySavedBooks() {
+            const bookGrid = document.getElementById('bookGrid');
+            const savedBooks = JSON.parse(localStorage.getItem('myBooks')) || [];
+
+            savedBooks.forEach(book => {
+                const bookHTML = `
+                    <div class="book-card" data-category="${book.category}">
+                        <div class="book-img">
+                            <img src="https://via.placeholder.com/200x250?text=${encodeURIComponent(book.title)}" alt="Book">
+                            <button class="wishlist-btn" onclick="toggleWishlist(this, '${book.title}')">❤</button>
+                        </div>
+                        <div class="book-info">
+                            <div class="location-badge">📍 ${book.location}</div>
+                            <h3>${book.title}</h3>
+                            <p style="font-size: 0.85rem; color: #22c55e; font-weight: 700;">Condition: ${book.condition}/5⭐</p>
+                            <div class="price-row"><span class="price">₹${book.price}</span></div>
+                            <button class="chat-btn" onclick="contactSeller('${book.whatsapp}', '${book.title}')">Chat on WhatsApp</button>
+                            <button class="sold-btn" onclick="markAsSold(this)" style="margin-top: 10px; background: #64748b; color: white; border: none; padding: 8px; border-radius: 8px; cursor: pointer; width: 100%;">Mark as Sold</button>
+                        </div>
+                    </div>
+                `;
+                bookGrid.innerHTML += bookHTML;
+            });
+        }
+
+        // ૨. Live Search ફંક્શન (નામ પરથી બુક શોધવા)
+        function liveSearch() {
+            let input = document.getElementById('bookSearch').value.toLowerCase();
+            let cards = document.querySelectorAll('.book-card');
+            
+            cards.forEach(card => {
+                let title = card.querySelector('h3').innerText.toLowerCase();
+                if (title.includes(input)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // ૩. City Filter ફંક્શન
+        function cityFilter() {
+            let selectedCity = document.getElementById('city-select').value.toLowerCase();
+            let cards = document.querySelectorAll('.book-card');
+
+            cards.forEach(card => {
+                let location = card.querySelector('.location-badge').innerText.toLowerCase();
+                if (selectedCity === "all" || location.includes(selectedCity)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // ૪. કેટેગરી ફિલ્ટર
+        function filterBooks(category, element) {
+            const books = document.querySelectorAll('.book-card');
+            const tags = document.querySelectorAll('.cat-tag');
+            tags.forEach(tag => tag.classList.remove('active-tag'));
+            element.classList.add('active-tag');
+            books.forEach(book => {
+                if (category === 'all' || book.getAttribute('data-category') === category) {
+                    book.style.display = 'block';
+                } else {
+                    book.style.display = 'none';
+                }
+            });
+        }
+
+        function contactSeller(num, name) {
+            if(!num || num === 'undefined') { alert("WhatsApp number not found!"); return; }
+            window.open(`https://wa.me/${num}?text=Hi, I want to buy ${name}`, '_blank');
+        }
+
+        function toggleWishlist(btn, name) {
+            btn.classList.toggle('active');
+            if(btn.classList.contains('active')) alert(name + " added to Wishlist! ❤️");
+        }
+
+        window.onload = displaySavedBooks;
+    </script>
+<script>
+    function markAsSold(btn) {
+        // બટનની ઉપરનું કાર્ડ પકડો
+        const card = btn.closest('.book-card');
+        
+        if (confirm("શું આ બુક વેચાઈ ગઈ છે?")) {
+            card.classList.add('sold');
+            btn.innerText = "SOLD OUT";
+            btn.style.background = "#ff4757";
+            btn.disabled = true;
+            alert("બુક હવે Sold Out દેખાશે.");
+        }
+    }
+</script>
 </body>
 </html>

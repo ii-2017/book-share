@@ -26,10 +26,10 @@
         <div class="request-grid">
             <div class="request-form-card">
                 <h3>Post New Request</h3>
-                <form class="request-form">
+                <form class="request-form" id="requestForm">
                     <div class="input-group">
                         <label>Book Name / Author</label>
-                        <input type="text" placeholder="e.g. JEE Maths by Cengage" required>
+                        <input type="text" id="requestedBookName" placeholder="e.g. JEE Maths by Cengage" required>
                     </div>
                     <div class="input-group">
                         <label>Category</label>
@@ -70,6 +70,28 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const requestForm = document.getElementById('requestForm');
+        
+        if (requestForm) {
+            requestForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // પેજ રિફ્રેશ થતું અટકાવશે
+
+                const bookName = document.getElementById('requestedBookName').value.toLowerCase();
+                
+                if(bookName) {
+                    // બ્રાઉઝરની મેમરીમાં બુકનું નામ સાચવો
+                    localStorage.setItem('lastRequestedBook', bookName);
+                    
+                    alert("તમારી રિક્વેસ્ટ સફળતાપૂર્વક સેવ થઈ ગઈ છે: " + bookName);
+                    
+                    // રિક્વેસ્ટ કર્યા પછી હોમ પેજ પર જવા માટે
+                    window.location.href = "index.html";
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>

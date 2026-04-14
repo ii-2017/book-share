@@ -1,5 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +25,7 @@
             <p>Fill in the details to find a buyer quickly</p>
         </div>
 
-        <form class="upload-form">
+        <form class="upload-form" id="bookForm">
             <div class="image-upload-box">
                 <input type="file" id="book-img" hidden>
                 <label for="book-img" class="upload-label">
@@ -35,55 +37,88 @@
             <div class="form-grid">
                 <div class="input-group">
                     <label>Book Title</label>
-                    <input type="text" placeholder="e.g. 12th Physics NCERT" required>
+                    <input type="text" id="title" placeholder="e.g. 12th Physics NCERT" required>
                 </div>
 
                 <div class="input-group">
                     <label>Category</label>
-                    <select required>
+                    <select id="category" required>
                         <option value="">Select Category</option>
                         <option value="commerce">Commerce</option>
                         <option value="science">Science</option>
                         <option value="engineering">Engineering</option>
-                        <option value="school">1-12th Std</option>
+                        <option value="school">school</option>
                         <option value="exam">Exam Preparation</option>
                     </select>
                 </div>
 
                 <div class="input-group">
                     <label>Price (₹)</label>
-                    <input type="number" placeholder="Enter price (0 for Free)" required>
+                    <input type="number" id="price" placeholder="Enter price (0 for Free)" required>
                 </div>
 
                 <div class="input-group">
                     <label>City / Location</label>
-                    <input type="text" placeholder="e.g. Rajkot, Gujarat" required>
+                    <input type="text" id="location" placeholder="e.g. Rajkot, Gujarat" required>
                 </div>
+
                 <div class="input-group">
-    <label>Book Condition (Current Status)</label>
-    <select id="book-condition" style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0; background: #f8fafc;" required>
-        <option value="5">⭐⭐⭐⭐⭐ (Like New / Seal Pack)</option>
-        <option value="4">⭐⭐⭐⭐ (Good / Minimal Use)</option>
-        <option value="3">⭐⭐⭐ (Average / Readable)</option>
-        <option value="2">⭐⭐ (Old / Some pages loose)</option>
-        <option value="1">⭐ (Very Old / Rough condition)</option>
-    </select>
-</div>
+                    <label>Book Condition</label>
+                    <select id="book-condition" style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0; background: #f8fafc;" required>
+                        <option value="5">⭐⭐⭐⭐⭐ (Like New)</option>
+                        <option value="4">⭐⭐⭐⭐ (Good)</option>
+                        <option value="3">⭐⭐⭐ (Average)</option>
+                        <option value="2">⭐⭐ (Old)</option>
+                        <option value="1">⭐ (Rough)</option>
+                    </select>
+                </div>
             </div>
 
             <div class="input-group">
                 <label>WhatsApp Number</label>
-                <input type="tel" placeholder="Enter your WhatsApp number" required>
+                <input type="tel" id="whatsapp" placeholder="Enter your WhatsApp number" required>
             </div>
 
             <div class="input-group">
                 <label>Short Description (Optional)</label>
-                <textarea rows="3" placeholder="Condition of the book, edition year, etc."></textarea>
+                <textarea id="description" rows="3" placeholder="Edition year, etc."></textarea>
             </div>
 
             <button type="submit" class="upload-submit">Post Listing Now</button>
         </form>
     </div>
 
+    <script>
+        document.getElementById('bookForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // ૧. બધી વિગતો ભેગી કરો
+            const newBook = {
+                title: document.getElementById('title').value,
+                category: document.getElementById('category').value,
+                price: document.getElementById('price').value,
+                location: document.getElementById('location').value,
+                condition: document.getElementById('book-condition').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                id: Date.now()
+            };
+
+            // ૨. LocalStorage માં સાચવો
+            let books = JSON.parse(localStorage.getItem('myBooks')) || [];
+            books.push(newBook);
+            localStorage.setItem('myBooks', JSON.stringify(books));
+
+            // ૩. Notification Check
+            const requestedTitle = localStorage.getItem('lastRequestedBook');
+            if (requestedTitle && newBook.title.toLowerCase().includes(requestedTitle.toLowerCase())) {
+                alert("🔔 NOTIFICATION: આ બુકની કોઈએ રિક્વેસ્ટ કરેલી છે!");
+            }
+
+            alert("બુક સફળતાપૂર્વક અપલોડ થઈ ગઈ છે!");
+            
+            // ૪. હોમ પેજ પર મોકલી દો
+            window.location.href = "index.html";
+        });
+    </script>
 </body>
 </html>

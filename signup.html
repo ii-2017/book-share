@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup | BOOKSHARE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-body">
+
+    <nav class="navbar">
+        <div class="logo">BOOKSHARE</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+
+    <div class="login-container" style="margin-top: 100px;">
+        <div class="login-header">
+            <h2>Create <span>Account</span></h2>
+            <p>Join BOOKSHARE to start selling your books</p>
+        </div>
+
+        <form class="login-form" id="signupForm" style="max-width: 400px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+            <div class="input-group" style="margin-bottom: 20px;">
+                <label>Full Name</label>
+                <input type="text" id="userName" placeholder="Enter your name" required style="width: 100%; padding: 12px; margin-top: 8px; border: 1px solid #ddd; border-radius: 8px;">
+            </div>
+
+            <div class="input-group" style="margin-bottom: 20px;">
+                <label>Email Address</label>
+                <input type="email" id="userEmail" placeholder="Enter your email" required style="width: 100%; padding: 12px; margin-top: 8px; border: 1px solid #ddd; border-radius: 8px;">
+            </div>
+
+            <div class="input-group" style="margin-bottom: 25px;">
+                <label>Create Password</label>
+                <input type="password" id="userPassword" placeholder="Minimum 6 characters" required style="width: 100%; padding: 12px; margin-top: 8px; border: 1px solid #ddd; border-radius: 8px;">
+            </div>
+
+            <button type="submit" class="login-submit" style="width: 100%; padding: 12px; background: #ff4757; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Create Account</button>
+            
+            <p style="margin-top: 20px; text-align: center;">Already have an account? <a href="login.html" style="color: #ff4757; text-decoration: none; font-weight: bold;">Login here</a></p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('userName').value;
+            const email = document.getElementById('userEmail').value;
+            const pass = document.getElementById('userPassword').value;
+
+            // ૧. LocalStorage માં યુઝરનો ડેટા સાચવો
+            localStorage.setItem('registeredName', name);
+            localStorage.setItem('registeredEmail', email);
+            localStorage.setItem('registeredPassword', pass);
+
+            alert("Signup Successful! 🎉 હવે તમે લોગિન કરી શકો છો.");
+            
+            // ૨. લોગિન પેજ પર મોકલી દો
+            window.location.href = "login.html";
+        });
+    </script>
+</body>
+</html>

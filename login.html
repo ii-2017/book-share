@@ -16,15 +16,15 @@
                 <p>Login to start buying and selling books</p>
             </div>
 
-            <form class="login-form">
+            <form class="login-form" id="loginForm">
                 <div class="input-group">
                     <label>Email Address</label>
-                    <input type="email" placeholder="Enter your email" required>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
                 </div>
                 
                 <div class="input-group">
                     <label>Password</label>
-                    <input type="password" placeholder="Enter password" required>
+                    <input type="password" id="loginPassword" placeholder="Enter password" required>
                 </div>
 
                 <div class="forgot-pass">
@@ -35,10 +35,37 @@
             </form>
 
             <div class="login-footer">
-                <p>Don't have an account? <a href="#">Create Account</a></p>
+                <p>Don't have an account? <a href="signup.html">Create Account</a></p>
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // ૧. ઇનપુટ કરેલી વિગતો મેળવો
+            const emailInput = document.getElementById('loginEmail').value;
+            const passInput = document.getElementById('loginPassword').value;
+
+            // ૨. Signup વખતે સ્ટોર થયેલો ડેટા મેળવો
+            const savedEmail = localStorage.getItem('registeredEmail');
+            const savedPass = localStorage.getItem('registeredPassword');
+
+            // ૩. વિગતો ચેક કરો
+            if (emailInput === savedEmail && passInput === savedPass) {
+                alert("Login Successful! 🔓");
+                
+                // લોગિન સ્ટેટસ સાચવો
+                localStorage.setItem('isLoggedIn', 'true'); 
+                
+                // હોમ પેજ પર મોકલો
+                window.location.href = "index.html";
+            } else {
+                alert("ખોટો ઈમેલ અથવા પાસવર્ડ! મહેરબાની કરીને ફરી ચેક કરો.");
+            }
+        });
+    </script>
 
 </body>
 </html>
