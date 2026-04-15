@@ -195,3 +195,35 @@ function markAsSold(btn) {
         alert("બુક હવે Sold Out દેખાશે.");
     }
 }
+function checkStatus() {
+    const loginBtn = document.getElementById('loginBtn');
+    const logoutLink = document.getElementById('logoutLink');
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+    if (isLoggedIn === 'true') {
+        loginBtn.style.display = 'none'; 
+        // અહીં 'block' ની જગ્યાએ 'inline-block' કરી નાખ્યું છે
+        logoutLink.style.display = 'inline-block'; 
+    } else {
+        loginBtn.style.display = 'inline-block';
+        logoutLink.style.display = 'none';
+    }
+    displaySavedBooks();
+}
+function deleteBook(index) {
+    // યુઝરને પૂછવા માટે (Double Check)
+    if (confirm("શું તમે આ બુકને કાયમી માટે ડિલીટ કરવા માંગો છો?")) {
+        // ૧. સ્ટોરેજમાંથી ડેટા લાવો
+        let books = JSON.parse(localStorage.getItem('myBooks')) || [];
+        
+        // ૨. લિસ્ટમાંથી બુક કાઢી નાખો
+        books.splice(index, 1);
+        
+        // ૩. નવું લિસ્ટ સ્ટોરેજમાં સેવ કરો
+        localStorage.setItem('myBooks', JSON.stringify(books));
+        
+        // ૪. પેજ રિફ્રેશ કરો જેથી તે કાર્ડ ગાયબ થઈ જાય
+        alert("બુક લિસ્ટમાંથી કાઢી નાખવામાં આવી છે.");
+        window.location.reload();
+    }
+}

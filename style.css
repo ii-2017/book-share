@@ -854,3 +854,350 @@ textarea {
     z-index: 100;
     border-radius: 5px;
 }
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* લોગો અને નામ વચ્ચેની જગ્યા */
+    font-weight: 700;
+    font-size: 24px;
+    color: #1e293b; /* તમારી થીમ મુજબનો ડાર્ક કલર */
+}
+
+.nav-logo {
+    width: 40px;  /* લોગોની પહોળાઈ */
+    height: 40px; /* લોગોની ઉંચાઈ */
+    object-fit: contain;
+    border-radius: 8px; /* જો લોગો ચોરસ હોય તો તેને થોડો રાઉન્ડ કરવા માટે */
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 24px;
+    
+    /* આ લાઈન લોગોના પર્પલ કલર સાથે મેચ થશે */
+    color: #2c2d77; /* આ એક સ્ટાન્ડર્ડ મોર્ડન પર્પલ (Indigo) છે */
+    
+    text-transform: uppercase; /* જો તમારે લખાણ Capital રાખવું હોય તો */
+    letter-spacing: 1px; /* પ્રોફેશનલ લુક માટે અક્ષરો વચ્ચે થોડી જગ્યા */
+}
+
+/* જો તમે ઈચ્છો તો 'SHARE' ને અલગ કલર આપી શકો છો */
+.logo span {
+    color: #2e2f70; /* આખું નામ પર્પલ થશે */
+}
+/* ૧. Mark as Sold બટન (ડાર્ક પર્પલ શેડ - લોગોના થડ જેવો) */
+.sold-btn {
+    background: #582C83 !important; /* ડાર્ક પર્પલ */
+    color: white !important;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.sold-btn:hover {
+    background: #452266 !important; /* થોડું વધુ ડાર્ક */
+}
+
+/* ૨. Delete Listing બટન (લાઇટ પર્પલ શેડ - લોગોના બહારના સર્કલ જેવો) */
+.delete-btn {
+    background: #E1D5F0 !important; /* લાઇટ પર્પલ */
+    color: #582C83 !important;      /* ડાર્ક પર્પલ ટેક્સ્ટ */
+    border: 1px solid #D1C4E9;
+    padding: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.delete-btn:hover {
+    background: #D1C4E9 !important;
+    color: #452266 !important;
+}
+
+/* ૩. પ્રાઇસ (કિંમત) નો કલર પણ લોગો મુજબ સેટ કરો */
+.price {
+    color: #582C83; 
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+/* ૧. મેઈન હેડિંગ (Give Your Books A Second Life) માટે */
+.hero h1 {
+    color: #582C83 !important; /* ડાર્ક પર્પલ */
+    font-weight: 800; /* થોડા વધુ જાડા અક્ષર પ્રોફેશનલ લાગશે */
+}
+
+/* ૨. નેવબારમાં લોગોની બાજુમાં જે BOOKSHARE લખ્યું છે તેના માટે */
+.logo span {
+    color: #582C83 !important;
+    font-weight: 700;
+    letter-spacing: 1px; /* અક્ષરો વચ્ચે થોડી જગ્યા */
+}
+
+/* ૩. સર્ચ બારની બોર્ડરને પણ થોડી મેચ કરવા માટે (Optional) */
+.search-bar {
+    border: 2px solid #E1D5F0; /* લાઈટ પર્પલ બોર્ડર */
+}
+/* ૧. નેવબારનું બેકગ્રાઉન્ડ - જે હોમ પેજથી અલગ દેખાશે */
+.navbar {
+    background-color: #E9E2F7 !important; /* થોડો વધુ ડાર્ક અને રિચ લાઇટ પર્પલ */
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* નીચેની લાઇન અને શેડો નેવબારને અલગ પાડશે */
+    border-bottom: 3px solid #D1C4E9; 
+    box-shadow: 0 4px 12px rgba(88, 44, 131, 0.15); 
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* ૨. નેવબારની લિંક્સ */
+.nav-links a {
+    text-decoration: none;
+    color: #582C83 !important; /* ડાર્ક પર્પલ અક્ષર */
+    font-weight: 700;
+    padding: 8px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+/* ૩. હોવર ઇફેક્ટ - ડાર્ક બોક્સ */
+.nav-links a:hover {
+    background-color: #582C83 !important; /* ડાર્ક પર્પલ બોક્સ */
+    color: #ffffff !important; /* વ્હાઇટ અક્ષર */
+}
+
+/* ૪. લોગો અને ટેક્સ્ટને પ્રોપરલી સેન્ટર કરવા માટે */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo span {
+    color: #582C83 !important;
+    font-size: 24px;
+    font-weight: 800;
+}
+/* ૧. કેટેગરી કન્ટેનર (બધા બટન્સની આજુબાજુની જગ્યા) */
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+/* ૨. કેટેગરી ટેગ્સ - Navbar જેવો લુક */
+.cat-tag {
+    background-color: #E9E2F7 !important; /* Navbar જેવો લાઈટ પર્પલ */
+    color: #582C83 !important;           /* ડાર્ક પર્પલ ફોન્ટ */
+    padding: 10px 25px;
+    border-radius: 12px;                  /* થોડા રાઉન્ડ ખૂણા */
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;        /* સ્મૂધ ઇફેક્ટ માટે */
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(88, 44, 131, 0.05); /* હળવો શેડો */
+}
+
+/* ૩. હોવર ઇફેક્ટ - Navbar જેવું ડાર્ક પર્પલ બોક્સ */
+.cat-tag:hover {
+    background-color: #582C83 !important; /* ડાર્ક પર્પલ બેકગ્રાઉન્ડ */
+    color: #ffffff !important;           /* વ્હાઇટ ફોન્ટ */
+    transform: translateY(-3px);          /* સહેજ ઉપર આવશે */
+    box-shadow: 0 6px 15px rgba(88, 44, 131, 0.2);
+}
+
+/* ૪. એક્ટિવ ટેગ (જ્યારે કોઈ કેટેગરી સિલેક્ટ થયેલી હોય) */
+.cat-tag.active-tag, .cat-tag.active {
+    background-color: #582C83 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(88, 44, 131, 0.3);
+}
+/* ૧. બુક કાર્ડનો આખો લુક બદલવા માટે */
+.book-card {
+    background: #ffffff;
+    border-radius: 20px; /* વધુ રાઉન્ડ ખૂણા */
+    overflow: hidden;
+    border: 1px solid #E9E2F7; /* લાઈટ પર્પલ બોર્ડર */
+    box-shadow: 0 10px 25px rgba(88, 44, 131, 0.05); /* હળવો પર્પલ શેડો */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* સ્મૂધ એનિમેશન */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ૨. હોવર ઇફેક્ટ - કાર્ડ થોડું ઉપર આવશે અને શેડો ડાર્ક થશે */
+.book-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(88, 44, 131, 0.15);
+    border-color: #8A5AC2; /* બોર્ડર પર્પલ થશે */
+}
+
+/* ૩. બુક ઈમેજ સેક્શન */
+.book-img {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.book-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.book-card:hover .book-img img {
+    transform: scale(1.1); /* હોવર કરતા ઈમેજ ઝૂમ થશે */
+}
+
+/* ૪. લોકેશન બેજ (📍 Rajkot) - એકદમ મોર્ડન લુક */
+.location-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #582C83;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* ૫. બુકની વિગતો (Info Section) */
+.book-info {
+    padding: 20px;
+    text-align: left;
+}
+
+.book-info h3 {
+    font-size: 18px;
+    color: #582C83;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.price-row {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.price {
+    font-size: 22px;
+    color: #8A5AC2;
+    font-weight: 800;
+}
+
+/* ૬. વોટ્સએપ બટન - પર્પલ ગ્રેડિયન્ટ લુક */
+.chat-btn {
+    background: linear-gradient(135deg, #8A5AC2 0%, #582C83 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.chat-btn:hover {
+    box-shadow: 0 8px 20px rgba(88, 44, 131, 0.3);
+    opacity: 0.9;
+}
+/* ૧. મેઈન હેડિંગ અને લખાણ (ડાર્ક પર્પલ) */
+.request-header h2, .request-header h1 {
+    color: #582C83 !important;
+}
+
+/* ૨. રિક્વેસ્ટ ફોર્મ કાર્ડ - પ્રીમિયમ લુક */
+.request-card {
+    background: #ffffff;
+    border: 1px solid #E9E2F7;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(88, 44, 131, 0.08);
+}
+
+/* ૩. ઈનપુટ બોક્સ (Inputs & Select) */
+.input-group label {
+    color: #582C83;
+    font-weight: 700;
+}
+
+.input-group input, .input-group select {
+    border: 2px solid #F5F0FF !important;
+    background-color: #FBF9FF !important;
+    border-radius: 12px;
+    padding: 12px;
+    color: #582C83;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #8A5AC2 !important; /* ફોકસ કરતા મીડિયમ પર્પલ */
+    outline: none;
+    background-color: #ffffff !important;
+}
+
+/* ૪. Post Request બટન (ગ્રેડિયન્ટ પર્પલ) */
+.post-btn, .request-submit {
+    background: linear-gradient(135deg, #8A5AC2 0%, #582C83 100%) !important;
+    color: white !important;
+    border-radius: 12px;
+    font-weight: 700;
+    padding: 15px;
+    border: none;
+    box-shadow: 0 5px 15px rgba(88, 44, 131, 0.2);
+}
+
+/* ૫. જમણી બાજુના રિક્વેસ્ટ લિસ્ટ કાર્ડ્સ */
+.recent-requests h3 {
+    color: #582C83;
+}
+
+.request-item {
+    background: #ffffff;
+    border: 1px solid #F5F0FF;
+    border-left: 5px solid #8A5AC2; /* સાઈડમાં પર્પલ બોર્ડર */
+    border-radius: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    transition: 0.3s;
+}
+
+.request-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(88, 44, 131, 0.1);
+}
+
+/* ૬. Waiting Badge - લોગોની લાઈટ થીમ મુજબ */
+.waiting-badge {
+    background: #E1D5F0 !important; /* લાઈટ પર્પલ */
+    color: #582C83 !important;      /* ડાર્ક પર્પલ ટેક્સ્ટ */
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 11px;
+    text-transform: uppercase;
+}
