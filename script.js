@@ -1,7 +1,7 @@
 // ૧. WhatsApp પર મેસેજ મોકલવાનું ફંક્શન
 function contactSeller(phoneNumber, bookName) {
     if (!phoneNumber || phoneNumber === "" || phoneNumber === "undefined") {
-        alert("સેલરનો WhatsApp નંબર ઉપલબ્ધ નથી.");
+        alert("Seller's WhatsApp number is not available.");
         return;
     }
     const message = `Hello, I saw your book "${bookName}" on BOOKSHARE and I am interested in buying it.`;
@@ -13,9 +13,9 @@ function contactSeller(phoneNumber, bookName) {
 function toggleWishlist(button, bookName) {
     button.classList.toggle('active');
     if (button.classList.contains('active')) {
-        alert(bookName + " Wishlist માં ઉમેરાઈ ગઈ છે! ❤️");
+        alert(bookName + "Added to Wishlist! ❤️");
     } else {
-        alert(bookName + " Wishlist માંથી કાઢી નાખી.");
+        alert(bookName + "Removed from Wishlist");
     }
 }
 
@@ -74,10 +74,10 @@ if (bookForm) {
         // રિક્વેસ્ટ નોટિફિકેશન ચેક
         const requestedTitle = localStorage.getItem('lastRequestedBook');
         if (requestedTitle && titleVal.toLowerCase().includes(requestedTitle.toLowerCase())) {
-            alert("🔔 NOTIFICATION: આ બુકની કોઈએ રિક્વેસ્ટ કરેલી છે!");
+            alert("🔔 NOTIFICATION: "Someone has already requested this book!"");
         }
 
-        alert("બુક સફળતાપૂર્વક અપલોડ થઈ ગઈ છે!");
+        alert("Book uploaded successfully!");
         
         // થોભો, ડેટા સેવ થયા પછી જ હોમ પેજ પર જશે
         setTimeout(() => {
@@ -187,12 +187,12 @@ function markAsSold(btn) {
     
     console.log("Card found:", card);
 
-    if (confirm("શું આ બુક વેચાઈ ગઈ છે?")) {
+    if (confirm("Has this book been sold?")) {
         card.classList.add('sold');
         btn.innerText = "SOLD OUT";
         btn.style.background = "#ff4757";
         btn.disabled = true;
-        alert("બુક હવે Sold Out દેખાશે.");
+        alert("The book will now be shown as Sold Out.");
     }
 }
 function checkStatus() {
@@ -212,7 +212,7 @@ function checkStatus() {
 }
 function deleteBook(index) {
     // યુઝરને પૂછવા માટે (Double Check)
-    if (confirm("શું તમે આ બુકને કાયમી માટે ડિલીટ કરવા માંગો છો?")) {
+    if (confirm("Are you sure you want to delete this book permanently?")) {
         // ૧. સ્ટોરેજમાંથી ડેટા લાવો
         let books = JSON.parse(localStorage.getItem('myBooks')) || [];
         
@@ -223,7 +223,7 @@ function deleteBook(index) {
         localStorage.setItem('myBooks', JSON.stringify(books));
         
         // ૪. પેજ રિફ્રેશ કરો જેથી તે કાર્ડ ગાયબ થઈ જાય
-        alert("બુક લિસ્ટમાંથી કાઢી નાખવામાં આવી છે.");
+        alert("Book removed from the listing.");
         window.location.reload();
     }
 }

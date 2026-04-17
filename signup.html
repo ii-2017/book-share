@@ -9,18 +9,27 @@
 <body class="login-body">
 
     <nav class="navbar">
-        <div class="logo">BOOKSHARE</div>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="login.html">Login</a>
-        </div>
+    <div class="logo" style="display: flex; align-items: center;">
+        <img src="c:\Users\Krutika Borsaniya\Pictures\bookshare1.jpeg" alt="Logo" class="nav-logo" style="height: 40px; margin-right: 12px; border-radius: 8px;">
+        
+        <span style="color: #582C83 !important; font-weight: 800 !important; font-size: 26px !important; display: inline-block;">BOOKSHARE</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="login.html" class="login-btn" style="color: #ffffff !important; background-color: #582C83 !important; padding: 10px 25px !important; border-radius: 12px !important; text-decoration: none !important; font-weight: 700 !important; margin-left: 15px; display: inline-block;">Login</a>
+        <button onclick="toggleDarkMode()" id="darkModeBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 15px;">🌙</button>
+        <a href="dashboard.html">My Profile</a>
+    </div>
+</nav>
     </nav>
 
     <div class="login-container" style="margin-top: 100px;">
         <div class="login-header">
-            <h2>Create <span>Account</span></h2>
-            <p>Join BOOKSHARE to start selling your books</p>
-        </div>
+            <div class="auth-header">
+    <h2>Create Account</h2>
+    <p>Join <strong>BOOKSHARE</strong> to start selling your books</p>
+</div>
 
         <form class="login-form" id="signupForm" style="max-width: 400px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
             <div class="input-group" style="margin-bottom: 20px;">
@@ -57,11 +66,14 @@
             localStorage.setItem('registeredEmail', email);
             localStorage.setItem('registeredPassword', pass);
 
-            alert("Signup Successful! 🎉 હવે તમે લોગિન કરી શકો છો.");
+            alert("Signup Successful! 🎉 "You can now login to your account.");
             
             // ૨. લોગિન પેજ પર મોકલી દો
             window.location.href = "login.html";
         });
     </script>
+    <script src="theme.js"></script>
+    
+<script src="logic.js"></script>
 </body>
 </html>

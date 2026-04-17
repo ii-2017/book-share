@@ -1,7 +1,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,21 +10,26 @@
 <body class="upload-body">
 
     <nav class="navbar">
-        <div class="logo">BOOKSHARE</div>
+        <div class="logo" style="display: flex; align-items: center;">
+            <img src="c:\Users\Krutika Borsaniya\Pictures\bookshare1.jpeg" alt="Logo" class="nav-logo" style="height: 40px; margin-right: 12px; border-radius: 8px;">
+            <span style="color: #582C83 !important; font-weight: 800 !important; font-size: 26px !important; display: inline-block; font-family: sans-serif;">BOOKSHARE</span>
+        </div>
+
         <div class="nav-links">
             <a href="index.html">Home</a>
-            <a href="upload.html" class="active">Sell Book</a>
-            <a href="login.html" class="login-btn">My Account</a>
+            <a href="dashboard.html">My Profile</a>
+            <a href="login.html" class="login-btn" style="color: #ffffff !important; background-color: #582C83 !important; padding: 10px 25px !important; border-radius: 12px !important; text-decoration: none !important; font-weight: 700 !important; margin-left: 15px; display: inline-block;">My Account</a>
+            <button onclick="toggleDarkMode()" id="darkModeBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 15px;">🌙</button>
         </div>
     </nav>
 
-    <div class="upload-container">
+    <div class="upload-container" style="margin-top: 100px;">
         <div class="upload-header">
-            <h2>List Your <span>Book</span></h2>
+            <h2>List Your Book</h2>
             <p>Fill in the details to find a buyer quickly</p>
         </div>
 
-        <form class="upload-form" id="bookForm">
+        <form class="upload-form" id="bookForm" onsubmit="uploadBook(event)">
             <div class="image-upload-box">
                 <input type="file" id="book-img" hidden>
                 <label for="book-img" class="upload-label">
@@ -47,7 +51,7 @@
                         <option value="commerce">Commerce</option>
                         <option value="science">Science</option>
                         <option value="engineering">Engineering</option>
-                        <option value="school">school</option>
+                        <option value="school">School</option>
                         <option value="exam">Exam Preparation</option>
                     </select>
                 </div>
@@ -74,51 +78,21 @@
                 </div>
             </div>
 
-            <div class="input-group">
+            <div class="input-group" style="margin-top: 15px;">
                 <label>WhatsApp Number</label>
                 <input type="tel" id="whatsapp" placeholder="Enter your WhatsApp number" required>
             </div>
 
-            <div class="input-group">
+            <div class="input-group" style="margin-top: 15px;">
                 <label>Short Description (Optional)</label>
                 <textarea id="description" rows="3" placeholder="Edition year, etc."></textarea>
             </div>
 
-            <button type="submit" class="upload-submit">Post Listing Now</button>
+            <button type="submit" class="upload-submit" style="background: #582C83;">Post Listing Now</button>
         </form>
     </div>
 
-    <script>
-        document.getElementById('bookForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // ૧. બધી વિગતો ભેગી કરો
-            const newBook = {
-                title: document.getElementById('title').value,
-                category: document.getElementById('category').value,
-                price: document.getElementById('price').value,
-                location: document.getElementById('location').value,
-                condition: document.getElementById('book-condition').value,
-                whatsapp: document.getElementById('whatsapp').value,
-                id: Date.now()
-            };
-
-            // ૨. LocalStorage માં સાચવો
-            let books = JSON.parse(localStorage.getItem('myBooks')) || [];
-            books.push(newBook);
-            localStorage.setItem('myBooks', JSON.stringify(books));
-
-            // ૩. Notification Check
-            const requestedTitle = localStorage.getItem('lastRequestedBook');
-            if (requestedTitle && newBook.title.toLowerCase().includes(requestedTitle.toLowerCase())) {
-                alert("🔔 NOTIFICATION: આ બુકની કોઈએ રિક્વેસ્ટ કરેલી છે!");
-            }
-
-            alert("બુક સફળતાપૂર્વક અપલોડ થઈ ગઈ છે!");
-            
-            // ૪. હોમ પેજ પર મોકલી દો
-            window.location.href = "index.html";
-        });
-    </script>
+    <script src="theme.js"></script>
+    <script src="logic.js"></script>
 </body>
 </html>

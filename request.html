@@ -9,13 +9,22 @@
 <body class="request-body">
 
     <nav class="navbar">
-        <div class="logo">BOOKSHARE</div>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="request.html" class="active">Request Book</a>
-            <a href="upload.html">Sell Book</a>
-        </div>
-    </nav>
+    <div class="logo" style="display: flex; align-items: center;">
+        <img src="c:\Users\Krutika Borsaniya\Pictures\bookshare1.jpeg" alt="Logo" class="nav-logo" style="height: 40px; margin-right: 10px; border-radius: 5px;">
+        
+        <span style="color: #582C83 !important; font-weight: 800 !important; font-size: 24px !important; display: inline-block;">BOOKSHARE</span>
+    </div>
+    
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+       
+        <a href="upload.html">Sell Book</a>
+        <a href="dashboard.html">My Profile</a>
+        <a href="login.html" class="login-btn" style="color: #ffffff !important; background-color: #582C83 !important; padding: 8px 20px !important; border-radius: 12px !important; text-decoration: none !important; font-weight: 700 !important; margin-left: 20px;">Login</a>
+        <button onclick="toggleDarkMode()" id="darkModeBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 15px;">🌙</button>
+        
+    </div>
+</nav>
 
     <div class="request-container">
         <div class="request-header">
@@ -84,7 +93,7 @@
                     // બ્રાઉઝરની મેમરીમાં બુકનું નામ સાચવો
                     localStorage.setItem('lastRequestedBook', bookName);
                     
-                    alert("તમારી રિક્વેસ્ટ સફળતાપૂર્વક સેવ થઈ ગઈ છે: " + bookName);
+                    alert("Your request has been saved successfully." + bookName);
                     
                     // રિક્વેસ્ટ કર્યા પછી હોમ પેજ પર જવા માટે
                     window.location.href = "index.html";
@@ -92,6 +101,6 @@
             });
         }
     </script>
-
+<script src="theme.js"></script>
 </body>
 </html>

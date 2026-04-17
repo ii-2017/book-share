@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard | BOOKSHARE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+    <nav class="navbar">
+        <div class="logo">
+            <span style="color: #582C83 !important; font-weight: 800; font-size: 24px;">BOOKSHARE</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html" class="active">My Profile</a>
+            <button onclick="toggleDarkMode()" id="darkModeBtn">🌙</button>
+        </div>
+    </nav>
+
+    <div class="main-content" style="padding: 20px 8%;">
+        <div class="user-header" style="background: var(--card-white); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 40px; display: flex; align-items: center; gap: 20px;">
+            <div class="user-avatar" style="width: 80px; height: 80px; background: #582C83; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800;">U</div>
+            <div>
+                <h2 id="displayUserName" style="color: #582C83;">Welcome, User Name</h2>
+                <p style="color: var(--text-muted);">Manage your shared books here</p>
+            </div>
+        </div>
+
+        <h3 style="margin-bottom: 20px;">My Listed Books</h3>
+        
+        <div id="userBookGrid" class="book-grid">
+            </div>
+    </div>
+
+    <script src="theme.js"></script>
+    <script src="logic.js"></script>
+</body>
+</html>

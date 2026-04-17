@@ -41,14 +41,22 @@ body {
     z-index: 1000;
 }
 
+/* ૧. લોગો ટેક્સ્ટ ફિક્સ - જે હવે આપણી પર્પલ થીમ પકડશે */
 .logo {
+    display: flex;
+    align-items: center;
     font-size: 1.6rem;
     font-weight: 800;
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; /* લોગો કલરફુલ ગ્રેડિયન્ટમાં */
+    /* અહીંથી Gradient અને Transparent કાઢી નાખ્યું છે જેથી આપણે આપેલો કલર દેખાય */
 }
 
+/* લોગોની અંદરના span (BOOKSHARE) માટે */
+.logo span {
+    color: #582C83 !important; /* ડાર્ક પર્પલ */
+    -webkit-text-fill-color: initial !important; /* ટ્રાન્સપરન્ટ ઇફેક્ટ દૂર કરી */
+    background: none !important;
+    font-size: 30px !important;
+}
 .nav-links a {
     color: var(--text-muted);
     text-decoration: none;
@@ -130,7 +138,6 @@ body {
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(168, 85, 247, 0.2);
 }
-
 /* --- Colorful Category Tags --- */
 .categories {
     display: flex;
@@ -141,30 +148,38 @@ body {
 }
 
 .cat-tag {
-    background: white;
+    background: white !important;
     padding: 12px 25px;
     border-radius: 100px;
     font-weight: 600;
     font-size: 0.9rem;
-    color: var(--text-muted);
+    color: #64748b !important; /* Text Muted Color */
     border: 1px solid #e2e8f0;
     transition: 0.4s;
     cursor: pointer;
 }
 
-/* દરેક કેટેગરીને અલગ કલરની ઈફેક્ટ આપવા */
+/* જે બટન સિલેક્ટ થયેલું હોય (Active) તેના માટે ખાસ પર્પલ કલર */
+.cat-tag.active-tag {
+    background: #582C83 !important; /* આપણી પર્પલ થીમ */
+    color: white !important;
+    border-color: #582C83 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(88, 44, 131, 0.3);
+}
+
+/* માઉસ ઉપર જાય ત્યારે થતી ઇફેક્ટ */
 .cat-tag:hover {
     transform: translateY(-5px);
-    color: white;
-    background: var(--primary-gradient);
-    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
-    border-color: transparent;
+    color: #582C83 !important; /* હોવર પર લખાણ પર્પલ થશે */
+    border-color: #582C83 !important;
+    background: #f5f3ff !important; /* આછો પર્પલ બેકગ્રાઉન્ડ */
 }
+
 /* --- Book Display Section --- */
 .book-container {
     padding: 60px 8%;
 }
-
 .section-title {
     font-size: 2rem;
     font-weight: 800;
@@ -1200,4 +1215,554 @@ textarea {
     border-radius: 50px;
     font-size: 11px;
     text-transform: uppercase;
+}
+/* ૧. મેઈન હેડિંગ (Latest Books) માટે */
+.section-title {
+    color: #582C83 !important; /* લોગોના થડ જેવો ડાર્ક પર્પલ */
+    font-size: 32px;
+    font-weight: 800;
+    text-align: left;
+    margin-bottom: 30px;
+    letter-spacing: -0.5px;
+}
+
+/* ૨. જો તમારે 'Books' શબ્દને થોડો લાઈટ પર્પલ રાખવો હોય (ઓપ્શનલ) */
+.section-title span {
+    color: #8A5AC2 !important; /* લોગોના પાંદડા જેવો પર્પલ */
+}
+/* ૧. 'List Your Book' હેડિંગ માટે (Upload Page) */
+.upload-card h1, .upload-container h2 {
+    color: #582C83 !important; /* લોગોના થડ જેવો ડાર્ક પર્પલ */
+    font-weight: 800;
+    text-align: center;
+}
+
+/* ૨. જો તમે 'Book' શબ્દને અલગ પર્પલ શેડ આપવા માંગતા હોવ */
+.upload-card h1 span {
+    color: #8A5AC2 !important; /* લોગોના પાંદડા જેવો પર્પલ */
+}
+
+/* ૩. હેડિંગની નીચેનું નાનું લખાણ (Fill in the details...) */
+.upload-card p {
+    color: #582C83;
+    opacity: 0.7;
+    text-align: center;
+}/* ૧. મેઈન બટન (Post Listing, Submit, વગેરે) */
+.submit-btn, .post-btn, .upload-submit-btn, .login-submit {
+    /* લોગોની થીમ મુજબનો પર્પલ ગ્રેડિયન્ટ */
+    background: linear-gradient(135deg, #8A5AC2 0%, #582C83 100%) !important;
+    color: white !important;
+    border: none !important;
+    padding: 15px 25px;
+    border-radius: 12px; /* પ્રોફેશનલ રાઉન્ડ ખૂણા */
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(88, 44, 131, 0.2);
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* ૨. હોવર ઇફેક્ટ (Hover Effect) - નેવબાર જેવું ડાર્ક બોક્સ */
+.submit-btn:hover, .post-btn:hover, .upload-submit-btn:hover {
+    background: #582C83 !important; /* પૂરેપૂરું ડાર્ક પર્પલ */
+    transform: translateY(-2px); /* સહેજ ઉપર આવશે */
+    box-shadow: 0 8px 20px rgba(88, 44, 131, 0.35);
+}
+
+/* ૩. બટન ક્લિક થાય ત્યારે (Active State) */
+.submit-btn:active {
+    transform: scale(0.98);
+}/* આ કોડને તમારી CSS ફાઈલમાં સૌથી નીચે પેસ્ટ કરો */
+.post-btn, .submit-btn, .upload-submit-btn, button[type="submit"] {
+    background-color: #6D3FAD !important; /* તમારો માંગેલો પર્પલ */
+    background-image: none !important;    /* જો જૂનો ગ્રેડિયન્ટ હોય તો કાઢી નાખશે */
+    color: white !important;
+    border-radius: 15px !important;
+    border: none !important;
+}
+/* ૧. 'Create Account' મેઈન હેડિંગ માટે */
+.signup-container h2, .auth-header h2 {
+    color: #582C83 !important; /* લોગોના થડ જેવો ડાર્ક પર્પલ */
+    font-weight: 800;
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+/* ૨. નીચેનું નાનું લખાણ અને 'BOOKSHARE' નામ માટે */
+.signup-container p, .auth-header p {
+    color: #582C83;
+    opacity: 0.8;
+}
+
+/* ૩. ખાસ 'BOOKSHARE' લખાણને હાઈલાઈટ કરવા માટે */
+.signup-container p span, .auth-header p strong {
+    color: #8A5AC2 !important; /* મીડિયમ પર્પલ */
+    font-weight: 700;
+}
+
+/* ૪. Signup પેજના ઈનપુટ લેબલ્સ (Name, Email, etc.) */
+.signup-form label {
+    color: #582C83 !important;
+    font-weight: 600;
+}
+
+/* ૫. Signup બટન (તમારા ફેવરિટ પર્પલ શેડમાં) */
+.signup-btn {
+    background-color: #6D3FAD !important;
+    color: white !important;
+    border-radius: 15px !important;
+    font-weight: 700;
+    border: none;
+    padding: 14px;
+    box-shadow: 0 4px 12px rgba(109, 63, 173, 0.2);
+}
+/* ૧. 'Welcome Back' મેઈન હેડિંગ માટે */
+.login-container h2, .welcome-text {
+    color: #582C83 !important; /* લોગોના થડ જેવો ડાર્ક પર્પલ */
+    font-weight: 800;
+    font-size: 32px;
+}
+
+/* ૨. 'Forgot Password?' અને 'Create Account' લિંક્સ માટે */
+.forgot-password, .create-account-link {
+    color: #6D3FAD !important; /* તમારો પસંદ કરેલો બટન પર્પલ કલર */
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.forgot-password:hover, .create-account-link:hover {
+    color: #582C83 !important;
+    text-decoration: underline;
+}
+
+/* ૩. 'Login' બટનને પણ પેલા બીજા બટન્સ જેવો જ કલર આપવા માટે */
+.login-btn {
+    background-color: #6D3FAD !important;
+    color: white !important;
+    border-radius: 15px !important;
+    font-weight: 700;
+    border: none;
+    padding: 14px;
+    box-shadow: 0 4px 12px rgba(109, 63, 173, 0.2);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #582C83 !important;
+    transform: translateY(-2px);
+}
+/* ૧. મેઈન હેડિંગ (Can't find your Book?) માટે */
+.request-header h2, .request-header h1 {
+    color: #582C83 !important; /* લોગોના થડ જેવો ડાર્ક પર્પલ */
+    font-weight: 800;
+}
+
+/* ૨. રિક્વેસ્ટ ફોર્મની અંદરના ટાઇટલ (Post New Request) માટે */
+.request-card h3, .post-request-title {
+    color: #582C83 !important;
+    font-weight: 700;
+}
+
+/* ૩. ઈનપુટ ફીલ્ડ્સના લેબલ્સ (Book Name, Category, Your City) */
+.input-group label, .form-label {
+    color: #582C83 !important; /* અત્યારે જે બ્લેક છે તેને પર્પલ કરશે */
+    font-weight: 700;
+}
+
+/* ૪. જમણી બાજુના લિસ્ટનું હેડિંગ (Recent Requests) */
+.recent-requests h3 {
+    color: #582C83 !important;
+    font-weight: 700;
+}
+
+/* ૫. રિક્વેસ્ટ લિસ્ટમાં બુકનું નામ (Organic Chemistry વગેરે) */
+.request-item h4, .request-book-name {
+    color: #582C83 !important;
+    font-weight: 700;
+}
+
+/* ૬. રિક્વેસ્ટ કરનારનું નામ અને શહેર (Requested by...) */
+.request-info {
+    color: #582C83;
+    opacity: 0.8; /* થોડું હળવું પર્પલ જે પ્રોફેશનલ લાગશે */
+}
+/* ૧. રિક્વેસ્ટ પેજના બધા જ હેડિંગ્સ (બધા જ શક્ય ક્લાસ સાથે) */
+.request-card h3, 
+.recent-requests h3, 
+.request-item h4, 
+.post-request-title, 
+.request-book-title, 
+h3, h4 {
+    color: #582C83 !important; /* ડાર્ક પર્પલ */
+    font-weight: 800 !important;
+}
+
+/* ૨. રિક્વેસ્ટ પેજના લેબલ્સ (Book Name, Category, City) */
+.input-group label, 
+.form-group label, 
+label {
+    color: #582C83 !important;
+    font-weight: 700 !important;
+}
+
+/* ૩. રિક્વેસ્ટમાં જે 'Waiting' લખેલું આવે છે તેના માટે */
+.waiting-badge, .status-waiting {
+    background-color: #E9E2F7 !important;
+    color: #582C83 !important;
+    border: 1px solid #D1C4E9 !important;
+}
+.logo span {
+    color: #582C83 !important; /* ડાર્ક પર્પલ લોગો થીમ મુજબ */
+    font-weight: 800 !important;
+    font-size: 22px;
+        letter-spacing: 1px;
+    font-family: 'Montserrat', sans-serif; /* જો તમે આ ફોન્ટ વાપરતા હોવ તો */
+}
+/* ૧. Search Button (Search Bar ની અંદરનું બટન) */
+.search-bar button {
+    background: #582C83 !important; /* આપણો પર્પલ કલર */
+    color: white !important;
+    border: none !important;
+    padding: 10px 25px !important;
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(88, 44, 131, 0.2) !important;
+}
+
+.search-bar button:hover {
+    background: #4b0082 !important; /* હોવર પર થોડું વધારે ડાર્ક */
+    transform: scale(1.05); /* થોડું મોટું થશે */
+}
+
+/* ૨. Login Button (Navbar માં જમણી બાજુ) */
+.login-btn {
+    background: #582C83 !important; /* આપણો પર્પલ કલર */
+    color: white !important;
+    padding: 10px 25px !important;
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(88, 44, 131, 0.3) !important;
+    display: inline-block;
+}
+
+.login-btn:hover {
+    background: #4b0082 !important;
+    box-shadow: 0 6px 20px rgba(88, 44, 131, 0.4) !important;
+    transform: translateY(-2px);
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    /* આ ફેરફાર તેને ફ્લોટિંગ બનાવશે */
+    width: 90%;             /* આખી સ્ક્રીન કરતા થોડો નાનો */
+    margin: 20px auto;      /* ઉપરથી નીચે આવશે અને વચ્ચે (Center) રહેશે */
+    padding: 15px 5%;
+    
+    background: rgba(255, 255, 255, 0.85) !important; /* કાચ જેવી ઇફેક્ટ */
+    backdrop-filter: blur(15px) !important;           /* બ્લર ઇફેક્ટ */
+    
+    border-radius: 20px !important;    /* ખૂણાઓથી ગોળાકાર */
+    border: 1px solid rgba(88, 44, 131, 0.1) !important; /* હળવી પર્પલ બોર્ડર */
+    
+    position: sticky;
+    top: 20px;              /* સ્ક્રીનની એકદમ ઉપર નહીં ચોંટે, થોડી જગ્યા રાખશે */
+    z-index: 1000;
+    
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important; /* પ્રીમિયમ શેડો */
+}
+.navbar {
+    width: 90%;
+    margin: 10px auto !important; /* ઉપરથી માર્જિન ઓછું કરી નાખો */
+    position: fixed;            /* તેને ફિક્સ રાખવા માટે */
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /* આનાથી તે બરાબર સેન્ટરમાં રહેશે */
+    z-index: 1000;
+}
+.signup-container {
+    display: flex;
+    justify-content: center; /* આજુ-બાજુથી સેન્ટર */
+    align-items: center;     /* ઉપર-નીચેથી સેન્ટર */
+    min-height: 100vh;       /* આખી સ્ક્રીન જેટલી હાઈટ */
+    padding-top: 80px;       /* Navbar ની નીચે જગ્યા રાખવા માટે */
+}
+
+/* ફોર્મના બોક્સ માટે */
+.signup-card {
+    width: 100%;
+    max-width: 450px;       /* ફોર્મ બહુ પહોળું ના થઈ જાય તે માટે */
+    margin: auto;           /* સેન્ટરમાં રાખવા */
+}
+/* ડાર્ક મોડ માટેના સ્પેશિયલ કલર્સ */
+body.dark-theme {
+    --bg-light: #0f172a;       /* ઘાટો નેવી બ્લુ/બ્લેક બેકગ્રાઉન્ડ */
+    --card-white: #1e293b;     /* કાર્ડ્સ માટે ડાર્ક ગ્રે */
+    --text-dark: #f8fafc;      /* લખાણ સફેદ થઈ જશે */
+    --text-muted: #94a3b8;
+    background-image: none;    /* ડાર્ક મોડમાં બ્લર ગોળા કાઢી નાખવા */
+}
+
+/* ડાર્ક મોડમાં નેવબાર અને અન્ય સુધારા */
+body.dark-theme .navbar {
+    background: rgba(15, 23, 42, 0.8) !important;
+    border-bottom: 1px solid #334155;
+}
+
+body.dark-theme .cat-tag {
+    background: #334155 !important;
+    color: #f8fafc !important;
+}
+/* આખા પેજને ડાર્ક કરવા માટે */
+body.dark-theme {
+    background-color: #0f172a !important; /* ઘાટો કલર */
+    background-image: none !important;
+    color: #f8fafc !important;
+}
+
+/* બીજા પેજના ખાસ ક્લાસ (Request, Signup વગેરે) માટે */
+body.dark-theme .request-body,
+body.dark-theme .signup-container,
+body.dark-theme .upload-container,
+body.dark-theme section {
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+}
+
+/* ફોર્મની અંદરના સફેદ કાર્ડ્સને ડાર્ક કરવા માટે */
+body.dark-theme .signup-card, 
+body.dark-theme .book-card, 
+body.dark-theme .form-box {
+    background-color: #1e293b !important;
+    border: 1px solid #334155 !important;
+    color: #f8fafc !important;
+}
+
+/* ઈનપુટ બોક્સ (જ્યાં લખાણ લખાય છે) તેને પણ ડાર્ક કરવા */
+body.dark-theme input, 
+body.dark-theme select, 
+body.dark-theme textarea {
+    background-color: #334155 !important;
+    color: white !important;
+    border: 1px solid #475569 !important;
+}
+
+/* લખાણનો કલર ડાર્ક મોડમાં સફેદ કરવા */
+body.dark-theme h1, 
+body.dark-theme h2, 
+body.dark-theme h3, 
+body.dark-theme p, 
+body.dark-theme label {
+    color: #f8fafc !important;
+}
+/* --- Global Dark Mode Styles --- */
+body.dark-theme {
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+}
+
+/* ડાર્ક મોડમાં બધા જ ટેક્સ્ટ એલિમેન્ટ્સને પકડીને સફેદ કરવા */
+body.dark-theme h1, 
+body.dark-theme h2, 
+body.dark-theme h3, 
+body.dark-theme h4, 
+body.dark-theme p, 
+body.dark-theme span, 
+body.dark-theme label, 
+body.dark-theme li, 
+body.dark-theme small {
+    color: #f8fafc !important; /* એકદમ વ્હાઇટ જેવું લખાણ */
+}
+
+/* ફોર્મની અંદરના લેબલ્સ (જેમ કે 'Full Name', 'Email') ખાસ દેખાય તે માટે */
+body.dark-theme label {
+    color: #cbd5e1 !important; /* થોડો આછો ગ્રે/વ્હાઇટ */
+    font-weight: 600;
+}
+
+/* ઇનપુટ બોક્સની અંદર જે ટાઈપ કરો એ પણ સફેદ દેખાવું જોઈએ */
+body.dark-theme input, 
+body.dark-theme select, 
+body.dark-theme textarea {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+    border: 1px solid #334155 !important;
+}
+
+/* Placeholder (જે બોક્સમાં આછું લખેલું હોય) તેને પણ વંચાય તેવું કરવું */
+body.dark-theme input::placeholder {
+    color: #94a3b8 !important;
+}
+
+/* લિંક્સ જે ડાર્ક મોડમાં ન દેખાતી હોય (જેમ કે 'Login here') */
+body.dark-theme a {
+    color: #a855f7 !important; /* પર્પલ કલર જેથી ડાર્કમાં ચમકે */
+}
+
+/* કાર્ડ્સ અને કન્ટેનર */
+body.dark-theme .signup-card, 
+body.dark-theme .form-box, 
+body.dark-theme .book-card {
+    background-color: #1e293b !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+/* ૧. ડાર્ક મોડમાં કાર્ડ્સ અને ફોર્મ બોક્સ - સફેદ કલર કાઢી નાખ્યો */
+body.dark-theme .request-card, 
+body.dark-theme .form-box, 
+body.dark-theme .recent-requests div,
+body.dark-theme .signup-card {
+    background-color: #1a1a2e !important; /* ડાર્ક નેવી પર્પલ બેકગ્રાઉન્ડ */
+    border: 1px solid #582C83 !important;   /* પર્પલ બોર્ડર */
+    box-shadow: 0 5px 20px rgba(88, 44, 131, 0.2) !important;
+}
+
+/* ૨. ઘાટા અક્ષરો (Bold Fonts) - ડાર્ક પર્પલ (થોડો બ્રાઈટ જેથી વંચાય) */
+body.dark-theme h1, 
+body.dark-theme h2, 
+body.dark-theme h3, 
+body.dark-theme strong, 
+body.dark-theme .logo span {
+    color: #a855f7 !important; /* બ્રાઈટ પર્પલ */
+    font-weight: 800;
+}
+
+/* ૩. નોર્મલ અક્ષરો અને લેબલ્સ - લાઈટ પર્પલ */
+body.dark-theme p, 
+body.dark-theme label, 
+body.dark-theme span, 
+body.dark-theme small {
+    color: #d8b4fe !important; /* આછો પર્પલ (Light Purple) */
+}
+
+/* ૪. ઈનપુટ લેબલ્સ (જેમ કે Book Name, Category) */
+body.dark-theme .form-group label, 
+body.dark-theme .input-group label {
+    color: #e9d5ff !important; /* સોફ્ટ પર્પલ */
+    font-weight: 600;
+}
+
+/* ૫. ઈનપુટ બોક્સની અંદરનું લખાણ */
+body.dark-theme input, 
+body.dark-theme select, 
+body.dark-theme textarea {
+    background-color: #161625 !important;
+    color: #ffffff !important;
+    border: 1px solid #582C83 !important;
+}
+
+/* ૬. તાજેતરની રિક્વેસ્ટમાં નામ અને વિગત (Requested by: ...) */
+body.dark-theme .recent-requests p {
+    color: #c084fc !important; /* મીડિયમ પર્પલ */
+}
+/* ૧. આખા બોડીમાં ઉપરથી થોડી જગ્યા છોડવી */
+body {
+    padding-top: 100px !important; /* નેવબારની નીચે જગ્યા કરવા માટે */
+}
+
+/* ૨. ખાસ કરીને ફોર્મના કન્ટેનર માટે (Signup, Upload, Request) */
+.signup-container, 
+.request-body, 
+.upload-container,
+.main-content {
+    margin-top: 40px !important; /* નેવબારથી હેડિંગને નીચે ધકેલવા માટે */
+}
+
+/* ૩. નેવબારને ફિક્સ રાખવો જેથી તે હેડિંગની ઉપર ના ચઢી જાય */
+.navbar {
+    position: fixed;
+    top: 20px; /* હવામાં રાખવા માટે */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    z-index: 1000;
+}
+/* Dashboard Specific Styles */
+.user-header {
+    transition: 0.3s;
+}
+
+body.dark-theme .user-header {
+    background: #1e293b !important;
+    border: 1px solid #582C83;
+}
+
+.action-btns button {
+    transition: 0.3s;
+}
+
+.action-btns button:hover {
+    transform: scale(1.1);
+}
+
+body.dark-theme .action-btns button:first-child {
+    background: #334155 !important;
+    color: #a855f7 !important;
+}
+/* ડેશબોર્ડના ડીલીટ બટન માટે સ્પેશિયલ ડિઝાઇન */
+.dashboard-delete-btn {
+    background: rgba(88, 44, 131, 0.1) !important; /* આછો પર્પલ બેકગ્રાઉન્ડ */
+    color: #582C83 !important;                     /* ઘાટો પર્પલ અક્ષર */
+    border: 1px solid #582C83 !important;         /* પર્પલ બોર્ડર */
+    padding: 8px 16px !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+}
+
+.dashboard-delete-btn:hover {
+    background: #582C83 !important;                /* હોવર કરવાથી આખું પર્પલ */
+    color: white !important;                       /* અક્ષર સફેદ */
+    box-shadow: 0 4px 12px rgba(88, 44, 131, 0.2);
+    transform: translateY(-2px);
+}
+
+/* ડાર્ક મોડમાં બટન થોડું વધુ બ્રાઈટ દેખાય તે માટે */
+body.dark-theme .dashboard-delete-btn {
+    background: rgba(168, 85, 247, 0.1) !important;
+    color: #a855f7 !important;
+    border-color: #a855f7 !important;
+}
+
+body.dark-theme .dashboard-delete-btn:hover {
+    background: #a855f7 !important;
+    color: #ffffff !important;
+}
+
+/* ૧. મેઈન નેવબારમાં ફેરફાર */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* લોગો ડાબી બાજુ, લિંક્સ જમણી બાજુ */
+    align-items: center;
+    padding: 10px 40px !important; /* સાઈડમાંથી થોડી જગ્યા આપો */
+}
+
+/* ૨. લિંક્સના ગ્રુપને જમણી બાજુ ભેગું કરવા માટે */
+.nav-links {
+    display: flex !important;
+    justify-content: flex-end !important; /* બધું જમણી બાજુ ખેંચાશે */
+    gap: 15px !important; /* લિંક્સ વચ્ચેની ચોક્કસ જગ્યા (આ ઘટાડવાથી લિંક્સ નજીક આવશે) */
+    flex: none !important; /* આ લાઈન ખાસ ઉમેરજો, જેથી તે આખા નેવબારમાં ફેલાય નહીં */
+    margin-left: auto; /* લોગો અને લિંક્સ વચ્ચે મેક્સિમમ જગ્યા રાખશે */
+}
+
+/* ૩. બટન અને લિંક્સ વચ્ચેની વધારાની માર્જિન કાઢવા */
+.nav-links a, 
+.nav-links button {
+    margin: 0 !important; 
+    padding: 8px 12px !important; /* લિંકની આજુબાજુની જગ્યા */
 }

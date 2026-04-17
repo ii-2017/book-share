@@ -20,10 +20,15 @@
 
     <nav class="navbar">
 
-        <div class="logo">
-    <img src="c:\Users\Krutika Borsaniya\Pictures\bookshare1.jpeg" alt="Logo" class="nav-logo">
-    <span>BOOKSHARE</span>
-</div>
+        <div class="logo" style="display: flex; align-items: center;">
+
+            <img src="c:\Users\Krutika Borsaniya\Pictures\bookshare1.jpeg" alt="Logo" class="nav-logo">
+
+            <span style="color: #360766 !important; font-weight: 800 !important; font-size: 30px !important; margin-left: 10px; font-family: sans-serif; display: inline-block;">BOOKSHARE</span>
+
+        </div>
+
+
 
         <div class="nav-links">
 
@@ -31,13 +36,21 @@
 
             <a href="request.html">Request Book</a>
 
-            <a href="#" style="color: #ff4757;">My Wishlist ❤️</a>
-
             <a href="upload.html">Sell Book</a>
 
-            <a href="login.html" class="login-btn">Login</a>
+            <a href="dashboard.html">My Profile</a>
+
+            <a href="#" style="color: #ff4757;">My Wishlist ❤️</a>
+
+           
+
+            <a href="login.html" class="login-btn" style="color: #ffffff !important; background-color: #582C83 !important; padding: 10px 25px !important; border-radius: 12px !important; text-decoration: none !important; font-weight: 700 !important; display: inline-block !important;">Login</a>
 
             <a href="#" id="logoutLink" onclick="logoutUser()" style="display: none;">Logout</a>
+
+            <button onclick="toggleDarkMode()" id="darkModeBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 15px;">🌙</button>
+
+           
 
         </div>
 
@@ -98,6 +111,7 @@
             <div class="cat-tag" onclick="filterBooks('engineering', this)">Engineering</div>
 
             <div class="cat-tag" onclick="filterBooks('exam', this)">Exam Prep</div>
+           <div class="cat-tag" style="background: #582C83; color: white;" onclick="filterBooks('free', this)"> Free Books</div> 
 
         </div>
 
@@ -214,206 +228,182 @@
         </div>
 
     </div>
-
-
-
+    
     <script>
+        function displaySavedBooks() {
+            const bookGrid = document.getElementById('bookGrid');
+            if (!bookGrid) return; 
 
-        // ૧. બ્રાઉઝરમાં સાચવેલી નવી બુક્સ લોડ કરવા માટે
+            const savedBooks = JSON.parse(localStorage.getItem('myBooks')) || [];
+
+            savedBooks.forEach((book, index) => {
+                const bookHTML = `
+                    <div class="book-card" data-category="${book.category}">
+                        <div class="book-img">
+                            <img src="https://via.placeholder.com/200x250?text=${encodeURIComponent(book.title)}" alt="Book">
+                            <button class="wishlist-btn" onclick="toggleWishlist(this, '${book.title}')">❤</button>
+                        </div>
+                        <div class="book-info">
+                            <div class="location-badge">📍 ${book.location}</div>
+                            <h3>${book.title}</h3>
+                            <div class="price-row"><span class="price">₹${book.price}</span></div>
+                            
+                            <button class="chat-btn" onclick="contactSeller('${book.whatsapp}', '${book.title}')">
+                                Chat on WhatsApp
+                            </button>
+                            
+                            <button class="sold-btn" onclick="markAsSold(this)" style="margin-top: 10px; background: #64748b; color: white; border: none; padding: 10px; border-radius: 12px; cursor: pointer; width: 100%; font-weight: 600;">
+                                Mark as Sold
+                            </button>
+
+                            <button class="delete-btn" onclick="deleteBook(${index})" style="margin-top: 10px; background: #e2e8f0; color: #475569; border: none; padding: 10px; border-radius: 12px; cursor: pointer; width: 100%; font-weight: 600; font-size: 14px;">
+                                Delete Listing 🗑️
+                            </button>
+                        </div>
+                    </div>
+                `;
+                bookGrid.innerHTML += bookHTML;
+            });
+        }
 
         function displaySavedBooks() {
-    const bookGrid = document.getElementById('bookGrid');
-    if (!bookGrid) return; 
+            const bookGrid = document.getElementById('bookGrid');
+            if (!bookGrid) return; 
 
-    const savedBooks = JSON.parse(localStorage.getItem('myBooks')) || [];
+            const savedBooks = JSON.parse(localStorage.getItem('myBooks')) || [];
 
-    savedBooks.forEach((book, index) => {
-        const bookHTML = `
-            <div class="book-card" data-category="${book.category}">
-                <div class="book-img">
-                    <img src="https://via.placeholder.com/200x250?text=${encodeURIComponent(book.title)}" alt="Book">
-                    <button class="wishlist-btn" onclick="toggleWishlist(this, '${book.title}')">❤</button>
-                </div>
-                <div class="book-info">
-                    <div class="location-badge">📍 ${book.location}</div>
-                    <h3>${book.title}</h3>
-                    <div class="price-row"><span class="price">₹${book.price}</span></div>
-                    
-                    <button class="chat-btn" onclick="contactSeller('${book.whatsapp}', '${book.title}')">
-                        Chat on WhatsApp
-                    </button>
-                    
-                    <button class="sold-btn" onclick="markAsSold(this)" style="margin-top: 10px; background: #64748b; color: white; border: none; padding: 10px; border-radius: 12px; cursor: pointer; width: 100%; font-weight: 600;">
-                        Mark as Sold
-                    </button>
+            savedBooks.forEach((book, index) => {
+                // --- ઉમેરેલી લાઈન: પ્રાઈસ ચેક કરવા માટે ---
+                const isFree = (book.price == 0 || String(book.price).toLowerCase() === 'free');
 
-                    <button class="delete-btn" onclick="deleteBook(${index})" style="margin-top: 10px; background: #e2e8f0; color: #475569; border: none; padding: 10px; border-radius: 12px; cursor: pointer; width: 100%; font-weight: 600; font-size: 14px;">
-                        Delete Listing 🗑️
-                    </button>
-                </div>
-            </div>
-        `;
-        bookGrid.innerHTML += bookHTML;
-    });
-}
+                const bookHTML = `
+    <div class="book-card" data-category="${book.category}" style="position: relative; border: ${isFree ? '2px solid #582C83' : '1px solid #eee'};">
+        
+        <div class="location-badge" style="position: absolute; top: 10px; left: 10px; z-index: 20;">📍 ${book.location}</div>
 
-// બુક ડીલીટ કરવા માટેનું લોજિક
-function deleteBook(index) {
-    if (confirm("શું તમે આ બુકને લિસ્ટમાંથી કાઢી નાખવા માંગો છો?")) {
-        let books = JSON.parse(localStorage.getItem('myBooks')) || [];
-        books.splice(index, 1); // તે નંબરની બુક કાઢી નાખો
-        localStorage.setItem('myBooks', JSON.stringify(books)); // નવો ડેટા સાચવો
-        window.location.reload(); // પેજ રિફ્રેશ કરો
-    }
-}
+        <div class="book-img">
+            <img src="https://via.placeholder.com/200x250?text=${encodeURIComponent(book.title)}" alt="Book">
+            <button class="wishlist-btn" onclick="toggleWishlist(this, '${book.title}')">❤</button>
+        </div>
 
+        <div class="book-info" style="position: relative;"> 
+            
+            ${isFree ? '<span style="background: #582C83; color: white; padding: 4px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: 800; position: absolute; top: 10px; right: 10px; z-index: 10;">🎁 FREE</span>' : ''}
 
+            <h3 style="margin-top: 5px;">${book.title}</h3>
+            
+            <div class="price-row"><span class="price">${isFree ? 'FREE' : '₹' + book.price}</span></div>
+            
+            <button class="chat-btn" onclick="contactSeller('${book.whatsapp}', '${book.title}')">
+                Chat on WhatsApp
+            </button>
+            
+            <button class="sold-btn" onclick="markAsSold(this)" style="margin-top: 10px; background: #64748b; color: white; border: none; padding: 10px; border-radius: 12px; cursor: pointer; width: 100%; font-weight: 600;">
+                Mark as Sold
+            </button>
 
-        // ૨. Live Search ફંક્શન (નામ પરથી બુક શોધવા)
+            <button class="delete-btn" onclick="deleteBook(${index})" style="margin-top: 10px; background: #e2e8f0; color: #475569; border: none; padding: 10px; border-radius: 12px; cursor: pointer; width: 100%; font-weight: 600; font-size: 14px;">
+                Delete Listing 🗑️
+            </button>
+        </div>
+    </div>
+`;
+                bookGrid.innerHTML += bookHTML;
+            });
+        }
+
+        function deleteBook(index) {
+            if (confirm("Are you sure you want to remove this book from the listing?")) {
+                let books = JSON.parse(localStorage.getItem('myBooks')) || [];
+                books.splice(index, 1);
+                localStorage.setItem('myBooks', JSON.stringify(books));
+                window.location.reload();
+            }
+        }
 
         function liveSearch() {
-
             let input = document.getElementById('bookSearch').value.toLowerCase();
-
             let cards = document.querySelectorAll('.book-card');
-
-           
-
             cards.forEach(card => {
-
                 let title = card.querySelector('h3').innerText.toLowerCase();
-
-                if (title.includes(input)) {
-
-                    card.style.display = "block";
-
-                } else {
-
-                    card.style.display = "none";
-
-                }
-
+                card.style.display = title.includes(input) ? "block" : "none";
             });
-
         }
-
-
-
-        // ૩. City Filter ફંક્શન
 
         function cityFilter() {
-
             let selectedCity = document.getElementById('city-select').value.toLowerCase();
-
             let cards = document.querySelectorAll('.book-card');
-
-
-
             cards.forEach(card => {
-
                 let location = card.querySelector('.location-badge').innerText.toLowerCase();
-
-                if (selectedCity === "all" || location.includes(selectedCity)) {
-
-                    card.style.display = "block";
-
-                } else {
-
-                    card.style.display = "none";
-
-                }
-
+                card.style.display = (selectedCity === "all" || location.includes(selectedCity)) ? "block" : "none";
             });
-
         }
 
-
-
-        // ૪. કેટેગરી ફિલ્ટર
-
+        // --- સુધારેલું ફંક્શન: Free Books ફિલ્ટર કરવા માટે ---
         function filterBooks(category, element) {
-
             const books = document.querySelectorAll('.book-card');
-
             const tags = document.querySelectorAll('.cat-tag');
-
             tags.forEach(tag => tag.classList.remove('active-tag'));
-
             element.classList.add('active-tag');
-
+            
             books.forEach(book => {
+                const priceText = book.querySelector('.price').innerText;
+                const isFreeBook = priceText.includes('FREE');
 
-                if (category === 'all' || book.getAttribute('data-category') === category) {
-
+                if (category === 'all') {
                     book.style.display = 'block';
-
+                } else if (category === 'free') {
+                    book.style.display = isFreeBook ? 'block' : 'none';
                 } else {
-
-                    book.style.display = 'none';
-
+                    book.style.display = (book.getAttribute('data-category') === category) ? 'block' : 'none';
                 }
-
             });
-
         }
-
-
 
         function contactSeller(num, name) {
-
             if(!num || num === 'undefined') { alert("WhatsApp number not found!"); return; }
-
             window.open(`https://wa.me/${num}?text=Hi, I want to buy ${name}`, '_blank');
-
         }
-
-
 
         function toggleWishlist(btn, name) {
-
             btn.classList.toggle('active');
-
             if(btn.classList.contains('active')) alert(name + " added to Wishlist! ❤️");
-
         }
 
-
+        function markAsSold(btn) {
+            const card = btn.closest('.book-card');
+            if (confirm("Has this book been sold?")) {
+                card.classList.add('sold');
+                btn.innerText = "SOLD OUT";
+                btn.style.background = "#ff4757";
+                btn.disabled = true;
+                alert("The book will now be shown as Sold Out.");
+            }
+        }
 
         window.onload = displaySavedBooks;
 
-    </script>
-
-<script>
-
-    function markAsSold(btn) {
-
-        // બટનની ઉપરનું કાર્ડ પકડો
-
-        const card = btn.closest('.book-card');
-
-       
-
-        if (confirm("શું આ બુક વેચાઈ ગઈ છે?")) {
-
-            card.classList.add('sold');
-
-            btn.innerText = "SOLD OUT";
-
-            btn.style.background = "#ff4757";
-
-            btn.disabled = true;
-
-            alert("બુક હવે Sold Out દેખાશે.");
-
+        function toggleDarkMode() {
+            const body = document.body;
+            const btn = document.getElementById('darkModeBtn');
+            body.classList.toggle('dark-theme');
+            if (body.classList.contains('dark-theme')) {
+                btn.innerText = "☀️";
+                localStorage.setItem('theme', 'dark');
+            } else {
+                btn.innerText = "🌙";
+                localStorage.setItem('theme', 'light');
+            }
         }
 
-    }
-// Mark as Sold બટન પછી આ લાઇન ઉમેરો
-<button class="delete-btn" onclick="deleteBook(${index})" style="margin-top: 10px; background: #e2e8f0; color: #475569; border: none; padding: 10px; border-radius: 12px; cursor: pointer; width: 100%; font-weight: 600; font-size: 14px; transition: 0.3s;">
-    Delete Listing 🗑️
-</button>
-</script>
-
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-theme');
+                document.getElementById('darkModeBtn').innerText = "☀️";
+            }
+        });
+    </script>
+    <script src="theme.js"></script>
+    
 </body>
-
 </html>
