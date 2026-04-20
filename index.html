@@ -40,8 +40,7 @@
 
             <a href="dashboard.html">My Profile</a>
 
-            <a href="#" style="color: #ff4757;">My Wishlist ❤️</a>
-
+            <a href="javascript:void(0)" onclick="filterWishlist()" style="color: #ff4757;">My Wishlist ❤️</a>
            
 
             <a href="login.html" class="login-btn" style="color: #ffffff !important; background-color: #582C83 !important; padding: 10px 25px !important; border-radius: 12px !important; text-decoration: none !important; font-weight: 700 !important; display: inline-block !important;">Login</a>
@@ -133,7 +132,7 @@
 
                     <img src="c:\Users\Krutika Borsaniya\Pictures\phi.jpg" alt="Science Book">
 
-                    <button class="wishlist-btn" onclick="toggleWishlist(this, 'Physics Part 1')">❤</button>
+                    <button class="wishlist-btn" onclick="toggleWishlist(this, 'Physics Part 1')" style="color: #ccc;">❤</button>
 
                 </div>
 
@@ -171,7 +170,7 @@
 
                     <img src="c:\Users\Krutika Borsaniya\Pictures\commers.jpg" alt="Commerce Book">
 
-                    <button class="wishlist-btn" onclick="toggleWishlist(this, 'Accountancy')">❤</button>
+                   <button class="wishlist-btn" onclick="toggleWishlist(this, 'Physics Part 1')" style="color: #ccc;">❤</button>
 
                 </div>
 
@@ -201,7 +200,7 @@
 
                     <img src="c:\Users\Krutika Borsaniya\Pictures\engineer book.jpg" alt="Engineering Book">
 
-                    <button class="wishlist-btn" onclick="toggleWishlist(this, 'Engineering Drawing')">❤</button>
+                   <button class="wishlist-btn" onclick="toggleWishlist(this, 'Physics Part 1')" style="color: #ccc;">❤</button>
 
                 </div>
 
@@ -230,23 +229,44 @@
     </div>
     
     <script>
+        // ૧. બધી બુક્સ (જૂની અને નવી) હોમ પેજ પર બતાવવા માટેનું ફંક્શન
         function displaySavedBooks() {
             const bookGrid = document.getElementById('bookGrid');
             if (!bookGrid) return; 
 
+            // લોકલ સ્ટોરેજમાંથી નવી અપલોડ કરેલી બુક્સ મેળવો
             const savedBooks = JSON.parse(localStorage.getItem('myBooks')) || [];
 
             savedBooks.forEach((book, index) => {
+                const isFree = (book.price == 0 || String(book.price).toLowerCase() === 'free');
+
                 const bookHTML = `
-                    <div class="book-card" data-category="${book.category}">
+                    <div class="book-card" data-category="${book.category}" style="position: relative; border: ${isFree ? '2px solid #582C83' : '1px solid #eee'};">
+                        
+                        <div class="location-badge" style="position: absolute; top: 10px; left: 10px; z-index: 20;">📍 ${book.location}</div>
+
                         <div class="book-img">
                             <img src="https://via.placeholder.com/200x250?text=${encodeURIComponent(book.title)}" alt="Book">
                             <button class="wishlist-btn" onclick="toggleWishlist(this, '${book.title}')">❤</button>
                         </div>
-                        <div class="book-info">
-                            <div class="location-badge">📍 ${book.location}</div>
-                            <h3>${book.title}</h3>
-                            <div class="price-row"><span class="price">₹${book.price}</span></div>
+
+                        <div class="book-info" style="position: relative;"> 
+                            ${isFree ? '<span style="background: #582C83; color: white; padding: 4px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: 800; position: absolute; top: 10px; right: 10px; z-index: 10;">🎁 FREE</span>' : ''}
+
+                           <div class="condition-stars" style="margin-bottom: 8px;">
+    <span style="font-size: 0.85rem; color: #22c55e; font-weight: 700;">Condition: </span>
+    
+    <span style="color: #fbbf24; font-size: 0.9rem;">
+        ${'⭐'.repeat(book.condition && book.condition != 0 ? parseInt(book.condition) : 5)}
+    </span>
+    
+    <span style="color: #64748b; font-size: 0.75rem;">
+        (${book.condition && book.condition != 0 ? book.condition : 5}/5 Quality)
+    </span>
+</div>
+                            <h3 style="margin-top: 5px;">${book.title}</h3>
+                            
+                            <div class="price-row"><span class="price">${isFree ? 'FREE' : '₹' + book.price}</span></div>
                             
                             <button class="chat-btn" onclick="contactSeller('${book.whatsapp}', '${book.title}')">
                                 Chat on WhatsApp
@@ -266,49 +286,25 @@
             });
         }
 
-        function displaySavedBooks() {
-            const bookGrid = document.getElementById('bookGrid');
-            if (!bookGrid) return; 
-
-            const savedBooks = JSON.parse(localStorage.getItem('myBooks')) || [];
-
-            savedBooks.forEach((book, index) => {
-                // --- ઉમેરેલી લાઈન: પ્રાઈસ ચેક કરવા માટે ---
-                const isFree = (book.price == 0 || String(book.price).toLowerCase() === 'free');
-
-                const bookHTML = `
-    <div class="book-card" data-category="${book.category}" style="position: relative; border: ${isFree ? '2px solid #582C83' : '1px solid #eee'};">
-        
-        <div class="location-badge" style="position: absolute; top: 10px; left: 10px; z-index: 20;">📍 ${book.location}</div>
-
-        <div class="book-img">
-            <img src="https://via.placeholder.com/200x250?text=${encodeURIComponent(book.title)}" alt="Book">
-            <button class="wishlist-btn" onclick="toggleWishlist(this, '${book.title}')">❤</button>
-        </div>
-
-        <div class="book-info" style="position: relative;"> 
+        // ૨. કેટેગરી ફિલ્ટર (બધી જ બુક્સ માટે કામ કરશે)
+        function filterBooks(category, element) {
+            const books = document.querySelectorAll('.book-card');
+            const tags = document.querySelectorAll('.cat-tag');
             
-            ${isFree ? '<span style="background: #582C83; color: white; padding: 4px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: 800; position: absolute; top: 10px; right: 10px; z-index: 10;">🎁 FREE</span>' : ''}
+            tags.forEach(tag => tag.classList.remove('active-tag'));
+            if(element) element.classList.add('active-tag');
+            
+            books.forEach(book => {
+                const priceRow = book.querySelector('.price');
+                const isFreeBook = priceRow ? priceRow.innerText.includes('FREE') : false;
 
-            <h3 style="margin-top: 5px;">${book.title}</h3>
-            
-            <div class="price-row"><span class="price">${isFree ? 'FREE' : '₹' + book.price}</span></div>
-            
-            <button class="chat-btn" onclick="contactSeller('${book.whatsapp}', '${book.title}')">
-                Chat on WhatsApp
-            </button>
-            
-            <button class="sold-btn" onclick="markAsSold(this)" style="margin-top: 10px; background: #64748b; color: white; border: none; padding: 10px; border-radius: 12px; cursor: pointer; width: 100%; font-weight: 600;">
-                Mark as Sold
-            </button>
-
-            <button class="delete-btn" onclick="deleteBook(${index})" style="margin-top: 10px; background: #e2e8f0; color: #475569; border: none; padding: 10px; border-radius: 12px; cursor: pointer; width: 100%; font-weight: 600; font-size: 14px;">
-                Delete Listing 🗑️
-            </button>
-        </div>
-    </div>
-`;
-                bookGrid.innerHTML += bookHTML;
+                if (category === 'all') {
+                    book.style.display = 'block';
+                } else if (category === 'free') {
+                    book.style.display = isFreeBook ? 'block' : 'none';
+                } else {
+                    book.style.display = (book.getAttribute('data-category') === category) ? 'block' : 'none';
+                }
             });
         }
 
@@ -339,29 +335,8 @@
             });
         }
 
-        // --- સુધારેલું ફંક્શન: Free Books ફિલ્ટર કરવા માટે ---
-        function filterBooks(category, element) {
-            const books = document.querySelectorAll('.book-card');
-            const tags = document.querySelectorAll('.cat-tag');
-            tags.forEach(tag => tag.classList.remove('active-tag'));
-            element.classList.add('active-tag');
-            
-            books.forEach(book => {
-                const priceText = book.querySelector('.price').innerText;
-                const isFreeBook = priceText.includes('FREE');
-
-                if (category === 'all') {
-                    book.style.display = 'block';
-                } else if (category === 'free') {
-                    book.style.display = isFreeBook ? 'block' : 'none';
-                } else {
-                    book.style.display = (book.getAttribute('data-category') === category) ? 'block' : 'none';
-                }
-            });
-        }
-
         function contactSeller(num, name) {
-            if(!num || num === 'undefined') { alert("WhatsApp number not found!"); return; }
+            if(!num || num === 'undefined' || num === '') { alert("WhatsApp number not found!"); return; }
             window.open(`https://wa.me/${num}?text=Hi, I want to buy ${name}`, '_blank');
         }
 
@@ -381,8 +356,6 @@
             }
         }
 
-        window.onload = displaySavedBooks;
-
         function toggleDarkMode() {
             const body = document.body;
             const btn = document.getElementById('darkModeBtn');
@@ -396,14 +369,16 @@
             }
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
+        // પેજ લોડ થાય ત્યારે બુક્સ બતાવવી
+        window.onload = function() {
+            displaySavedBooks();
             if (localStorage.getItem('theme') === 'dark') {
                 document.body.classList.add('dark-theme');
-                document.getElementById('darkModeBtn').innerText = "☀️";
+                const btn = document.getElementById('darkModeBtn');
+                if(btn) btn.innerText = "☀️";
             }
-        });
+        };
     </script>
     <script src="theme.js"></script>
-    
 </body>
 </html>

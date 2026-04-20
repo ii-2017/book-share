@@ -210,20 +210,20 @@ function checkStatus() {
     }
     displaySavedBooks();
 }
-function deleteBook(index) {
-    // યુઝરને પૂછવા માટે (Double Check)
-    if (confirm("Are you sure you want to delete this book permanently?")) {
-        // ૧. સ્ટોરેજમાંથી ડેટા લાવો
-        let books = JSON.parse(localStorage.getItem('myBooks')) || [];
-        
-        // ૨. લિસ્ટમાંથી બુક કાઢી નાખો
-        books.splice(index, 1);
-        
-        // ૩. નવું લિસ્ટ સ્ટોરેજમાં સેવ કરો
-        localStorage.setItem('myBooks', JSON.stringify(books));
-        
-        // ૪. પેજ રિફ્રેશ કરો જેથી તે કાર્ડ ગાયબ થઈ જાય
-        alert("Book removed from the listing.");
-        window.location.reload();
-    }
+function filterBooks(category, element) {
+    const books = document.querySelectorAll('.book-card');
+    const tags = document.querySelectorAll('.cat-tag');
+    
+    // એક્ટિવ ક્લાસ બદલવા માટે
+    tags.forEach(tag => tag.classList.remove('active-tag'));
+    if(element) element.classList.add('active-tag');
+
+    books.forEach(book => {
+        // જો 'all' હોય તો બધી બતાવવી, નહીતર કેટેગરી મુજબ
+        if (category === 'all') {
+            book.style.display = 'block';
+        } else {
+            book.style.display = (book.getAttribute('data-category') === category) ? 'block' : 'none';
+        }
+    });
 }

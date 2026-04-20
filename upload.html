@@ -30,14 +30,22 @@
         </div>
 
         <form class="upload-form" id="bookForm" onsubmit="uploadBook(event)">
-            <div class="image-upload-box">
-                <input type="file" id="book-img" hidden>
-                <label for="book-img" class="upload-label">
-                    <span class="upload-icon">📸</span>
-                    <p>Click to Upload Book Cover</p>
-                </label>
-            </div>
-
+            <div class="image-upload-box" style="text-align: center; border: 2px dashed #582C83; padding: 20px; border-radius: 15px;">
+    <input type="file" id="book-img" hidden onchange="previewImage(event)" accept="image/*">
+    
+    <label for="book-img" class="upload-label" style="cursor: pointer;">
+        <span class="upload-icon" style="font-size: 2.5rem;">📸</span>
+        <p style="font-weight: 800; color: #582C83; margin-top: 10px;">Click to Upload Book Cover</p>
+    </label>
+    
+    <div id="preview-container" style="margin-top: 20px; display: none;">
+        <img id="image-preview" src="#" alt="Selected Image" 
+             style="width: 100%; max-width: 180px; border-radius: 12px; border: 3px solid #582C83; padding: 5px; box-shadow: 0 8px 20px rgba(88,44,131,0.2);">
+        <p style="color: #ff4757; font-size: 0.9rem; font-weight: 800; cursor: pointer; margin-top: 15px;" onclick="removeImage()">
+            ✕ Remove & Change
+        </p>
+    </div>
+</div>
             <div class="form-grid">
                 <div class="input-group">
                     <label>Book Title</label>
